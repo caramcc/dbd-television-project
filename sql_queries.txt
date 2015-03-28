@@ -1,0 +1,35 @@
+BE AWARE ON LOADING:
+- must strip commas from imdb_votes before coercing it to_i
+- must reformat start_date and end_date from format Dec/31/1969 to 1969-12-31
+- strip timezone data from airtime/make its own field
+- query OMDb for content rating (later)
+
+CREATE TABLE IF NOT EXISTS caramcc_tv_shows (
+  show_id int(11) NOT NULL AUTO_INCREMENT,
+  show_title varchar(255) NOT NULL DEFAULT '',
+  country varchar(255) NOT NULL DEFAULT '',
+  start_date date NOT NULL DEFAULT '1000-01-01',
+  end_date date NOT NULL DEFAULT '1000-01-01',
+  content_rating varchar(11) NOT NULL DEFAULT '',
+  classification varchar(255) NOT NULL DEFAULT '',
+  genres varchar(2047) NOT NULL DEFAULT '',
+  runtime int(11) NOT NULL DEFAULT '0',
+  network varchar(255) NOT NULL DEFAULT '',
+  airtime varchar(11) NOT NULL DEFAULT '',
+  timezone varchar(63) NOT NULL DEFAULT '',
+  airdays varchar(2047) NOT NULL DEFAULT '',
+  languages varchar(2047) NOT NULL DEFAULT '',
+  writers varchar(2047) NOT NULL DEFAULT '',
+  actors varchar(2047) NOT NULL DEFAULT '',
+  plot_summary varchar(2047) NOT NULL DEFAULT '',
+  alternate_titles varchar(2047) NOT NULL DEFAULT '',
+  award_nominations int(11) NOT NULL DEFAULT '0',
+  award_wins int(11) NOT NULL DEFAULT '0',
+  imdb_rating float(8,3) NOT NULL DEFAULT '0',
+  imdb_votes int(11) NOT NULL DEFAULT '0',
+  imdb_id varchar(11) NOT NULL DEFAULT '',
+  tvrage_id int(11) NOT NULL DEFAULT '0',
+  flagged tinyint(1) NOT NULL DEFAULT '0',
+  flag varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (show_id)
+);

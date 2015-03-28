@@ -1,0 +1,16 @@
+List of TVRage.com status codes (No obvious documentation provided on their API)
+
+1 = Returning Series
+2 = Canceled/Ended
+3 = TBD/On The Bubble
+4 = In Development
+5 DNE
+6 DNE
+7 = New Series
+8 = Never Aired
+9 = Final Season
+10 = On Hiatus
+11 = Pilot Ordered
+12 = Pilot Rejected
+13 = Canceled
+14 = Ended

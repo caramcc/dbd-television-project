@@ -1,0 +1,19 @@
+{
+  "to_delete": [
+    {
+      "tvr_id": 41975
+    },
+
+  ],
+  "to_change_omdb": [
+  	{
+  	  "old_id": "tt4076872",
+  	  "new_id": "tt3693866"
+  	},
+  	{
+  		"old_id": "tt0338585",
+  		"new_id": ""
+  	},
+  	
+  ]
+}
