@@ -1,1 +1,0 @@
-All of the data has been put into json files in this directory. I'm not committing it right now because it's a pretty intense amount of data.
