@@ -1,5 +1,5 @@
 require 'net/http'
-require "uri"
+require 'uri'
 require 'json'
 require 'xmlsimple'
 require 'SecureRandom'
@@ -21,7 +21,7 @@ def process_threaded(output_file_path, data_hash)
   data_hash.each do |title, hash|
 
     begin
-      tvrage_id = hash["tvrage_id"]
+      tvrage_id = hash['tvrage_id']
       show_data = {}
 
       tvrage_show_url = "http://services.tvrage.com/feeds/showinfo.php?sid=#{tvrage_id}"
