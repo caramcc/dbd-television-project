@@ -5,7 +5,7 @@ TV Rage API is also used to populate the table with the majority of the fields.
 
 [OMDb API](http://www.omdbapi.com/) is used to supplement the data with some additional information.
 
-=====
+[FanPageList](http://fanpagelist.com/) is used to gather twitter handles for shows, networks, and actors
 
 # Scripts
 
@@ -13,11 +13,15 @@ The data was downloaded and reformatted using the following scripts, located in 
 
 - `tv_show_titles.rb` - used to get the primary list of all TV shows to include in the table. It writes the titles to a json file, which is read by another script.
 
-- `threaded_tv_show_data.rb` - used to get the majority of the data on each TV show. Reads from the previously generated json file to get the list of shows to look up, then query both the TV Rage API and the OMDb API for more detailed data about each show. Writes the output to a json file in the form caramcc_tv_show_data_*.json. Strangely, conforms to rate-limiting rules for both databases, despite running 18 threads at a time and not sleeping between queries. (I did initially try to be nice about all the requests I was making but 3 hours later I wasn't even 10% done... and I did check on the rate-limiting rules, so as to not be inconsiderate.)
+- `threaded_tv_show_data.rb` - used to get the majority of the data on each TV show. Reads from the previously generated json file to get the list of shows to look up, then query both the TV Rage API and the OMDb API for more detailed data about each show. Writes the output to a json file in the form `caramcc_tv_show_data_*.json`.
+
+- `query_table.rb` - when run in command line with the args `show title` and `network`, queries database and produces a list of show titles for shows that contain both params. Pass an empty string to either field to generate all show titles for a given network, or shows whose titles contain a certain string across all networks. Will be renamed eventually.
+
+- `sort_through_flags.rb` - generates json file of each flagged show, sorted by flag, for manual review.
+
+- `scraperbot/twitter_handle_scraper.rb` - used to scrape twitter handles from FanPageList.
 
 
-
-=====
 
 # Data Auditing
 
@@ -39,7 +43,6 @@ The most frequent cause of inconsistency among the data comes from the TV Show n
 Most of the time, missing OMDb data implies that the show is very old and/or obscure. While these shows will still be added to the database (for now) their data might not be relevant or useful as it applies to TV Shows people are tweeting about.
 
 
-====
 
 # SQL
 
@@ -48,7 +51,6 @@ SQL to insert the data into my database
 The data is cleaned on first insertion.
 
 
-====
 
 # Database Schema
 
