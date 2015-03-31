@@ -32,26 +32,26 @@ tvrage_titles_data['show'].each do |show|
 	if show['status'][0].to_i % 4 == 0
     # don't want shows where title contains cyrillic
     # (provides false results in OMDb searches)
-    unless show['name'].match(/\p{Cyrillic}/)
+    unless show['name'][0].match(/\p{Cyrillic}/)
       if unaired_shows[show['name'][0]].nil?
         unaired_shows[show['name'][0]] =
             {
                 'tvrage_id' => show['id'][0],
                 'country' => show['country'][0],
-                'active' => is_active?(show['status'])
+                'active' => false
             }
       end
     end
 
   else
 
-    unless show['name'].match(/\p{Cyrillic}/)
+    unless show['name'][0].match(/\p{Cyrillic}/)
       if overall_data[show['name'][0]].nil?
         overall_data[show['name'][0]] =
         {
           'tvrage_id' => show['id'][0],
           'country' => show['country'][0],
-          'active' => is_active?(show['status'])
+          'active' => is_active?(show['status'][0])
         }
       end
     end
@@ -64,6 +64,6 @@ file_path = "caramcc_tv_show_titles_#{Time.now.to_i}.json"
 unaired_file_path = "caramcc_unaired_show_titles_#{Time.now.to_i}.json"
 
 # block is preferred syntax, closes file automatically when block terminates.
-File.open(file_path, 'w') { |file| file.write(overall_data.to_json) }
-File.open(unaired_file_path, 'w') { |file| file.write(unaired_shows.to_json) }
+File.open(file_path, 'w') { |file| file.write(JSON.pretty_generate(overall_data)) }
+File.open(unaired_file_path, 'w') { |file| file.write(JSON.pretty_generate(unaired_shows)) }
 

@@ -1,5 +1,5 @@
 require 'net/http'
-require "uri"
+require 'uri'
 require 'json'
 # require 'active_support'
 require 'mysql2'

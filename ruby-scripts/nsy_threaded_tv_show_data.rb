@@ -5,6 +5,38 @@ require 'xmlsimple'
 require 'SecureRandom'
 require 'active_support'
 
+# {
+#     "showid"=>["26254"],
+#     "showname"=>["The Legend of Korra"],
+#     "showlink"=>["http://tvrage.com/The_Legend_of_Korra"],
+#     "seasons"=>["4"],
+#     "started"=>["2012"],
+#     "startdate"=>["Apr/14/2012"],
+#     "ended"=>["Dec/19/2014"],
+#     "origin_country"=>["US"],
+#     "status"=>["Ended"],
+#     "classification"=>["Animation"],
+#     "genres"=>[
+#         {"genre"=>
+#              ["Anime", "Action", "Adventure", "Fantasy"]
+#         }],
+#     "runtime"=>["30"],
+#     "network"=>[{"country"=>"US", "content"=>"nickToons"}],
+#     "airtime"=>["21:00"],
+#     "airday"=>["Friday"],
+#     "timezone"=>["GMT-5 +DST"],
+#     "akas"=>[
+#         {"aka"=>
+#              [
+#                  {"attr"=>"Working title", "country"=>"US", "content"=>"Avatar: The Legend of Korra"},
+#                  {"attr"=>"Alternate title", "country"=>"US", "content"=>"The Last Airbender: Legend of Korra"},
+#                  {"country"=>"RU", "content"=>"Легенда о Корре"}
+#              ]
+#         }]
+# }
+
+@tvr_fields = %w(showid showname showlink seasons started startdate ended origin_country
+    status classification genres runtime network airtime airday timezone akas)
 
 # only for Arrays, Hashes, Strings
 def blank?(object) 

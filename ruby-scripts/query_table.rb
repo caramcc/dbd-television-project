@@ -28,19 +28,11 @@ require 'mysql2'
 #   puts row["show_title"]
 # end
 
-result = @client.query("SELECT flag FROM #{@table} WHERE flagged=1;")
+show_title = ARGV[0]
+show_network = ARGV[1]
 
-flags = {}
-result.each do |flag|
-  if flags[flag].nil?
-    flags[flag] = {
-      count: 1,
-      titles: [flag]
-    }
-  else
-    flags[flag] = {
-      count: flags[flag][:count] += 1,
-      titles: flags[flag][:titles].push flag
-    }
-  end
+result = @client.query("SELECT * FROM #{@table} WHERE show_title LIKE '%#{show_title}%' AND network LIKE '%#{show_network}%';")
+
+result.each do |row|
+ puts row['show_title']
 end
