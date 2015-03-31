@@ -1,0 +1,1022 @@
+{
+  "show_data": {
+    "Ellen DeGneres (The Ellen Show)": {
+      "network": "TV Host",
+      "twitter_handle": "@TheEllenShow"
+    },
+    "SportsCenter": {
+      "network": "",
+      "twitter_handle": "@SportsCenter"
+    },
+    "Programa Panico": {
+      "network": "",
+      "twitter_handle": "@programapanico"
+    },
+    "Fantástico": {
+      "network": "",
+      "twitter_handle": "@showdavida"
+    },
+    "Legendarios": {
+      "network": "",
+      "twitter_handle": "@Legendarios"
+    },
+    "106 & Park": {
+      "network": "",
+      "twitter_handle": "@106andpark"
+    },
+    "Anderson Cooper": {
+      "network": "CNN",
+      "twitter_handle": "@andersoncooper"
+    },
+    "The X Factor": {
+      "network": "",
+      "twitter_handle": "@TheXFactor"
+    },
+    "iCarly": {
+      "network": "Nickelodeon",
+      "twitter_handle": "@iCarly"
+    },
+    "The Dr. Oz Show": {
+      "network": "FOX",
+      "twitter_handle": "@DrOz"
+    },
+    "The Voice": {
+      "network": "NBC",
+      "twitter_handle": "@NBCTheVoice"
+    },
+    "The Walking Dead": {
+      "network": "AMC",
+      "twitter_handle": "@WalkingDead_AMC"
+    },
+    "The Big Bang Theory": {
+      "network": "CBS",
+      "twitter_handle": "@BigBang_CBS"
+    },
+    "The Daily Show": {
+      "network": "Comedy Central",
+      "twitter_handle": "@TheDailyShow"
+    },
+    "Rachel Maddow": {
+      "network": "TV Host",
+      "twitter_handle": "@maddow"
+    },
+    "Bill Maher": {
+      "network": "HBO",
+      "twitter_handle": "@billmaher"
+    },
+    "The X Factor (USA)": {
+      "network": "FOX",
+      "twitter_handle": "@TheXFactorUSA"
+    },
+    "Glee": {
+      "network": "FOX",
+      "twitter_handle": "@GLEEonFOX"
+    },
+    "SportsNation": {
+      "network": "",
+      "twitter_handle": "@SportsNation"
+    },
+    "Today Show": {
+      "network": "NBC",
+      "twitter_handle": "@TODAYshow"
+    },
+    "Pretty Little Liars": {
+      "network": "ABC",
+      "twitter_handle": "@ABCFpll"
+    },
+    "Good Morning America": {
+      "network": "ABC",
+      "twitter_handle": "@GMA"
+    },
+    "Larry King": {
+      "network": "TV Host",
+      "twitter_handle": "@kingsthings"
+    },
+    "Late Night with Jimmy Fallon": {
+      "network": "NBC",
+      "twitter_handle": "@FallonTonight"
+    },
+    "BBC Click": {
+      "network": "BBC",
+      "twitter_handle": "@BBCClick"
+    },
+    "Game of Thrones": {
+      "network": "HBO",
+      "twitter_handle": "@GameOfThrones"
+    },
+    "The Simpsons": {
+      "network": "FOX",
+      "twitter_handle": "@HomerJSimpson"
+    },
+    "PBS": {
+      "network": "",
+      "twitter_handle": "@PBS"
+    },
+    "Anthony Bourdain: No Reservations": {
+      "network": "Travel Channel",
+      "twitter_handle": "@Bourdain"
+    },
+    "Gossip Girl": {
+      "network": "CW",
+      "twitter_handle": "@gossipgirl"
+    },
+    "Top Gear": {
+      "network": "BBC",
+      "twitter_handle": "@BBC_TopGear"
+    },
+    "MythBusters": {
+      "network": "Discovery Channel",
+      "twitter_handle": "@MythBusters"
+    },
+    "Family Guy": {
+      "network": "FOX",
+      "twitter_handle": "@FamilyGuyonFOX"
+    },
+    "South Park": {
+      "network": "Comedy Central",
+      "twitter_handle": "@SouthPark"
+    },
+    "Suze Orman": {
+      "network": "TV Host",
+      "twitter_handle": "@SuzeOrmanShow"
+    },
+    "MTV UK": {
+      "network": "MTV",
+      "twitter_handle": "@MTVUK"
+    },
+    "Grey's Anatomy": {
+      "network": "ABC",
+      "twitter_handle": "@GreysABC"
+    },
+    "Nightline": {
+      "network": "ABC",
+      "twitter_handle": "@Nightline"
+    },
+    "Dr. Phil": {
+      "network": "OWN (Oprah Winfrey Network)",
+      "twitter_handle": "@DrPhil"
+    },
+    "The Wendy Williams Show": {
+      "network": "TV Host",
+      "twitter_handle": "@WendyWilliams"
+    },
+    "American Idol": {
+      "network": "FOX",
+      "twitter_handle": "@AmericanIdol"
+    },
+    "Saturday Night Live": {
+      "network": "NBC",
+      "twitter_handle": "@nbcsnl"
+    },
+    "MTV Latin America": {
+      "network": "MTV",
+      "twitter_handle": "@MTVLA"
+    },
+    "Criminal Minds": {
+      "network": "CBS",
+      "twitter_handle": "@CrimMinds_CBS"
+    },
+    "Breaking Bad": {
+      "network": "AMC",
+      "twitter_handle": "@BreakingBad_AMC"
+    },
+    "SpongeBob SquarePants": {
+      "network": "Nickelodeon",
+      "twitter_handle": "@SpongeBob"
+    },
+    "Once Upon a Time": {
+      "network": "ABC",
+      "twitter_handle": "@OnceABC"
+    },
+    "American Horror Story: Asylum": {
+      "network": "FX",
+      "twitter_handle": "@AHSFX"
+    },
+    "The Colbert Report": {
+      "network": "Comedy Central",
+      "twitter_handle": "@ColbertReport"
+    },
+    "How I Met Your Mother": {
+      "network": "CBS",
+      "twitter_handle": "@OfficialHIMYM"
+    },
+    "Fox Broadcasting": {
+      "network": "FOX",
+      "twitter_handle": "@FOXTV"
+    },
+    "The Gayle King Show": {
+      "network": "OWN (Oprah Winfrey Network)",
+      "twitter_handle": "@GayleKing"
+    },
+    "Sesame Street": {
+      "network": "",
+      "twitter_handle": "@sesamestreet"
+    },
+    "Modern Family": {
+      "network": "ABC",
+      "twitter_handle": "@ModernFam"
+    },
+    "NCIS": {
+      "network": "CBS",
+      "twitter_handle": "@NCIS_CBS"
+    },
+    "Scandal": {
+      "network": "ABC",
+      "twitter_handle": "@ScandalABC"
+    },
+    "C-SPAN": {
+      "network": "",
+      "twitter_handle": "@cspan"
+    },
+    "True Blood": {
+      "network": "HBO",
+      "twitter_handle": "@TrueBloodHBO"
+    },
+    "Bones": {
+      "network": "FOX",
+      "twitter_handle": "@BONESonFOX"
+    },
+    "American Dad": {
+      "network": "FOX",
+      "twitter_handle": "@AmericanDadTBS"
+    },
+    "Sons of Anarchy": {
+      "network": "FX",
+      "twitter_handle": "@SonsofAnarchy"
+    },
+    "Dexter": {
+      "network": "Showtime",
+      "twitter_handle": "@SHO_Dexter"
+    },
+    "The CW": {
+      "network": "CW",
+      "twitter_handle": "@CW_network"
+    },
+    "Dancing With The Stars": {
+      "network": "ABC",
+      "twitter_handle": "@DancingABC"
+    },
+    "New Girl": {
+      "network": "FOX",
+      "twitter_handle": "@NewGirlonFOX"
+    },
+    "60 Minutes": {
+      "network": "CBS",
+      "twitter_handle": "@60Minutes"
+    },
+    "ABC Family": {
+      "network": "ABC",
+      "twitter_handle": "@ABCFamily"
+    },
+    "Law & Order: SVU": {
+      "network": "NBC",
+      "twitter_handle": "@nbcsvu"
+    },
+    "Two and a Half Men": {
+      "network": "CBS",
+      "twitter_handle": "@TwoAndAHalfMen"
+    },
+    "Conan (Team Coco)": {
+      "network": "",
+      "twitter_handle": "@TeamCoco"
+    },
+    "Revenge": {
+      "network": "",
+      "twitter_handle": "@Revenge"
+    },
+    "Cake Boss": {
+      "network": "TLC",
+      "twitter_handle": "@CakeBossBuddy"
+    },
+    "WWE NXT": {
+      "network": "",
+      "twitter_handle": "@WWENXT"
+    },
+    "2 Broke Girls": {
+      "network": "CBS",
+      "twitter_handle": "@2BrokeGirls"
+    },
+    "Cartoon Network": {
+      "network": "",
+      "twitter_handle": "@cartoonnetwork"
+    },
+    "WWE Network": {
+      "network": "",
+      "twitter_handle": "@WWENetwork"
+    },
+    "The Office": {
+      "network": "NBC",
+      "twitter_handle": "@theofficenbc"
+    },
+    "NCIS: Los Angeles": {
+      "network": "CBS",
+      "twitter_handle": "@NCISLA_CBS"
+    },
+    "Survivor: Philippines": {
+      "network": "CBS",
+      "twitter_handle": "@Survivor_Tweet"
+    },
+    "Biggest Loser": {
+      "network": "NBC",
+      "twitter_handle": "@biggestlosernbc"
+    },
+    "AMC TV": {
+      "network": "AMC",
+      "twitter_handle": "@AMC_TV"
+    },
+    "The Mentalist": {
+      "network": "CBS",
+      "twitter_handle": "@Mentalist_CBS"
+    },
+    "CSI: NY": {
+      "network": "CBS",
+      "twitter_handle": "@CSINY_CBS"
+    },
+    "ABC 20/20": {
+      "network": "ABC",
+      "twitter_handle": "@ABC2020"
+    },
+    "America's Got Talent": {
+      "network": "NBC",
+      "twitter_handle": "@nbcagt"
+    },
+    "HBO Boxing": {
+      "network": "HBO",
+      "twitter_handle": "@HBOboxing"
+    },
+    "Girls": {
+      "network": "HBO",
+      "twitter_handle": "@girlsHBO"
+    },
+    "CSI: Miami": {
+      "network": "CBS",
+      "twitter_handle": "@CSIMiami_CBS"
+    },
+    "Hawaii Five-0": {
+      "network": "CBS",
+      "twitter_handle": "@HawaiiFive0CBS"
+    },
+    "Community": {
+      "network": "NBC",
+      "twitter_handle": "@CommunityTV"
+    },
+    "Late Show with David Letterman": {
+      "network": "CBS",
+      "twitter_handle": "@Letterman"
+    },
+    "House": {
+      "network": "FOX",
+      "twitter_handle": "@HOUSEonFOX"
+    },
+    "The Amazing Race": {
+      "network": "CBS",
+      "twitter_handle": "@AmazingRace_CBS"
+    },
+    "The Vampire Diaries": {
+      "network": "CW",
+      "twitter_handle": "@CW_VampDiaries"
+    },
+    "Skins": {
+      "network": "",
+      "twitter_handle": "@Skins"
+    },
+    "Fringe": {
+      "network": "FOX",
+      "twitter_handle": "@FRINGEonFOX"
+    },
+    "The Good Wife": {
+      "network": "CBS",
+      "twitter_handle": "@TheGoodWife_CBS"
+    },
+    "Parenthood": {
+      "network": "NBC",
+      "twitter_handle": "@nbcparenthood"
+    },
+    "Person of Interest": {
+      "network": "CBS",
+      "twitter_handle": "@PersonInterest"
+    },
+    "Cooking Channel": {
+      "network": "Cooking",
+      "twitter_handle": "@CookingChannel"
+    },
+    "Nitro Circus": {
+      "network": "MTV",
+      "twitter_handle": "@NitroCircus"
+    },
+    "Nashville": {
+      "network": "ABC",
+      "twitter_handle": "@Nashville_ABC"
+    },
+    "Blue Bloods": {
+      "network": "CBS",
+      "twitter_handle": "@BlueBloods_CBS"
+    },
+    "Chicago Fire": {
+      "network": "NBC",
+      "twitter_handle": "@NBCChicagoFire"
+    },
+    "So You Think You Can Dance": {
+      "network": "FOX",
+      "twitter_handle": "@DANCEonFOX"
+    },
+    "Shark Tank": {
+      "network": "ABC",
+      "twitter_handle": "@ABCSharkTank"
+    },
+    "Mike & Molly": {
+      "network": "CBS",
+      "twitter_handle": "@mikeandmolly"
+    },
+    "MasterChef": {
+      "network": "FOX",
+      "twitter_handle": "@MASTERCHEFonFOX"
+    },
+    "Kathie Lee and Hoda (Today Show)": {
+      "network": "NBC",
+      "twitter_handle": "@klgandhoda"
+    },
+    "Mad Men": {
+      "network": "AMC",
+      "twitter_handle": "@MadMen_AMC"
+    },
+    "One Tree Hill": {
+      "network": "CW",
+      "twitter_handle": "@RealOneTreeHill"
+    },
+    "Jersey Shore": {
+      "network": "MTV",
+      "twitter_handle": "@Alejandr0Borges"
+    },
+    "Kitchen Nightmares": {
+      "network": "FOX",
+      "twitter_handle": "@KNonFOX"
+    },
+    "Private Practice": {
+      "network": "ABC",
+      "twitter_handle": "@PrivatePractice"
+    },
+    "Piers Morgan Tonight": {
+      "network": "CNN",
+      "twitter_handle": "@PiersMorganLive"
+    },
+    "Hell's Kitchen": {
+      "network": "FOX",
+      "twitter_handle": "@HellsKitchenFOX"
+    },
+    "Homeland": {
+      "network": "Showtime",
+      "twitter_handle": "@SHO_Homeland"
+    },
+    "Switched at Birth": {
+      "network": "ABC",
+      "twitter_handle": "@ABCFsab"
+    },
+    "Top Chef": {
+      "network": "Bravo",
+      "twitter_handle": "@BravoTopChef"
+    },
+    "The Middle": {
+      "network": "ABC",
+      "twitter_handle": "@TheMiddle_ABC"
+    },
+    "Keeping Up with the Kardashians": {
+      "network": "",
+      "twitter_handle": "@KUWTK"
+    },
+    "Chuck": {
+      "network": "NBC",
+      "twitter_handle": "@nbcchuck"
+    },
+    "Spartacus": {
+      "network": "",
+      "twitter_handle": "@spartacus_starz"
+    },
+    "The Oprah Show": {
+      "network": "",
+      "twitter_handle": "@OprahsBookClub"
+    },
+    "Showtime Network": {
+      "network": "Showtime",
+      "twitter_handle": "@SHO_Network"
+    },
+    "The Ultimate Fighter": {
+      "network": "Spike",
+      "twitter_handle": "@UltimateFighter"
+    },
+    "FX Networks": {
+      "network": "FX",
+      "twitter_handle": "@FXNetworks"
+    },
+    "Raising Hope": {
+      "network": "FOX",
+      "twitter_handle": "@RaisingHopeFOX"
+    },
+    "CSI: Crime Scene Investigation": {
+      "network": "CBS",
+      "twitter_handle": "@CSI_CBS"
+    },
+    "Body of Proof": {
+      "network": "ABC",
+      "twitter_handle": "@BodyOfProofABC"
+    },
+    "30 Rock": {
+      "network": "NBC",
+      "twitter_handle": "@nbc30rock"
+    },
+    "IFC - Independent Film Channel": {
+      "network": "",
+      "twitter_handle": "@IFC"
+    },
+    "HBO Documentary Films": {
+      "network": "HBO",
+      "twitter_handle": "@HBODocs"
+    },
+    "The Game": {
+      "network": "",
+      "twitter_handle": "@LastFallMovie"
+    },
+    "Comedy Central's Indecision": {
+      "network": "Comedy Central",
+      "twitter_handle": "@indecision"
+    },
+    "Happy Endings": {
+      "network": "ABC",
+      "twitter_handle": "@HappyEndingsVH1"
+    },
+    "Bob's Burgers": {
+      "network": "FOX",
+      "twitter_handle": "@BobsBurgersFOX"
+    },
+    "WWE Classics on Demand": {
+      "network": "",
+      "twitter_handle": "@WWEClassics"
+    },
+    "Burn Notice": {
+      "network": "USA Network",
+      "twitter_handle": "@BurnNotice_USA"
+    },
+    "Dallas": {
+      "network": "TNT",
+      "twitter_handle": "@Dallas_TNT"
+    },
+    "The Secret Life of the American Teenager": {
+      "network": "ABC",
+      "twitter_handle": "@ABCFsecretlife"
+    },
+    "Last Man Standing": {
+      "network": "ABC",
+      "twitter_handle": "@LastManABC"
+    },
+    "Rally to Restore Sanity": {
+      "network": "Comedy Central",
+      "twitter_handle": "@Rally4Sanity"
+    },
+    "Melissa & Joey": {
+      "network": "ABC",
+      "twitter_handle": "@ABCFmelissajoey"
+    },
+    "Suburgatory": {
+      "network": "ABC",
+      "twitter_handle": "@SuburgatoryABC"
+    },
+    "Revolution": {
+      "network": "NBC",
+      "twitter_handle": "@NBCRevolution"
+    },
+    "Lost": {
+      "network": "ABC",
+      "twitter_handle": "@Lost_on_ABC"
+    },
+    "Elementary": {
+      "network": "CBS",
+      "twitter_handle": "@Elementary_CBS"
+    },
+    "The Mindy Project": {
+      "network": "FOX",
+      "twitter_handle": "@MindyProjectFOX"
+    },
+    "Whitney": {
+      "network": "NBC",
+      "twitter_handle": "@NBCWhitney"
+    },
+    "Up All Night": {
+      "network": "NBC",
+      "twitter_handle": "@NBCUpAllNight"
+    },
+    "WWE Studios": {
+      "network": "",
+      "twitter_handle": "@WWEStudios"
+    },
+    "Robot Chicken": {
+      "network": "",
+      "twitter_handle": "@cyborgturkey"
+    },
+    "Covert Affairs": {
+      "network": "USA Network",
+      "twitter_handle": "@CovertAffairs"
+    },
+    "F/V Cornelia Marie (Deadliest Catch)": {
+      "network": "Discovery Channel",
+      "twitter_handle": "@fvcorneliamarie"
+    },
+    "The Cleveland Show": {
+      "network": "FOX",
+      "twitter_handle": "@CLEVELANDonFOX"
+    },
+    "Heroes": {
+      "network": "NBC",
+      "twitter_handle": "@heroes"
+    },
+    "JOKES.com": {
+      "network": "Comedy Central",
+      "twitter_handle": "@ccstandup"
+    },
+    "Da Vinci's Demons": {
+      "network": "",
+      "twitter_handle": "@DaVincis_Starz"
+    },
+    "Harry's Law": {
+      "network": "NBC",
+      "twitter_handle": "@NBCHarrysLaw"
+    },
+    "The Real L Word": {
+      "network": "Showtime",
+      "twitter_handle": "@SHO_realLword"
+    },
+    "Mr. Bean": {
+      "network": "",
+      "twitter_handle": "@MrBean"
+    },
+    "Stargate Universe": {
+      "network": "Syfy",
+      "twitter_handle": "@stargatecommand"
+    },
+    "Defiance": {
+      "network": "Syfy",
+      "twitter_handle": "@DefianceWorld"
+    },
+    "The Killing": {
+      "network": "AMC",
+      "twitter_handle": "@TheKilling"
+    },
+    "Friday Night Lights": {
+      "network": "NBC",
+      "twitter_handle": "@nbcfnl"
+    },
+    "Weeds": {
+      "network": "Showtime",
+      "twitter_handle": "@SHO_weeds"
+    },
+    "Touch": {
+      "network": "FOX",
+      "twitter_handle": "@TOUCHonTV"
+    },
+    "Make It or Break It": {
+      "network": "ABC",
+      "twitter_handle": "@ABCFmiobi"
+    },
+    "The New Normal": {
+      "network": "NBC",
+      "twitter_handle": "@NBCTheNewNormal"
+    },
+    "WWE Tribute to the Troops": {
+      "network": "NBC",
+      "twitter_handle": "@TributeToTroops"
+    },
+    "Teenage Mutant Ninja Turtles": {
+      "network": "Nickelodeon",
+      "twitter_handle": "@TMNTMaster"
+    },
+    "Blue Mountain State": {
+      "network": "Spike",
+      "twitter_handle": "@BlueMtnState"
+    },
+    "The Closer": {
+      "network": "TNT",
+      "twitter_handle": "@TheCloser_TNT"
+    },
+    "Who Do You Think You Are?": {
+      "network": "NBC",
+      "twitter_handle": "@wdytya"
+    },
+    "Hot In Cleveland": {
+      "network": "TV Land",
+      "twitter_handle": "@hotnclevelandtv"
+    },
+    "Supermodelme.TV": {
+      "network": "",
+      "twitter_handle": "@supermodelme"
+    },
+    "Major Crimes": {
+      "network": "TNT",
+      "twitter_handle": "@MajorCrimesTNT"
+    },
+    "The Jeff Probst Show": {
+      "network": "",
+      "twitter_handle": "@JeffProbstShow"
+    },
+    "Boss": {
+      "network": "",
+      "twitter_handle": "@Boss_Starz"
+    },
+    "GCB": {
+      "network": "ABC",
+      "twitter_handle": "@GCB"
+    },
+    "Malibu Country": {
+      "network": "ABC",
+      "twitter_handle": "@Malibu_Country"
+    },
+    "ESPN Unite": {
+      "network": "",
+      "twitter_handle": "@UNITE"
+    },
+    "666 Park Avenue": {
+      "network": "ABC",
+      "twitter_handle": "@666ParkAve_ABC"
+    },
+    "Anna & Kristina's Grocery Bag": {
+      "network": "OWN (Oprah Winfrey Network)",
+      "twitter_handle": "@AnnaAndKristina"
+    },
+    "Perception": {
+      "network": "TNT",
+      "twitter_handle": "@PerceptionTNT"
+    },
+    "Love & Hip Hop: Atlanta": {
+      "network": "",
+      "twitter_handle": "@lhhhollywood"
+    },
+    "Ghost Whisperer": {
+      "network": "CBS",
+      "twitter_handle": "@ghostwhisperer"
+    },
+    "Season 25: Oprah Behind The Scenes": {
+      "network": "OWN (Oprah Winfrey Network)",
+      "twitter_handle": "@OprahShowBTS"
+    },
+    "Comedy Central Insider": {
+      "network": "Comedy Central",
+      "twitter_handle": "@ccinsider"
+    },
+    "Monk": {
+      "network": "USA Network",
+      "twitter_handle": "@Monk_USA"
+    },
+    "The Neighbors": {
+      "network": "ABC",
+      "twitter_handle": "@TheNeighborsABC"
+    },
+    "Cristina Ferrare's Big Bowl of Love": {
+      "network": "OWN (Oprah Winfrey Network)",
+      "twitter_handle": "@CristinaCooks"
+    },
+    "$#*! My Dad Says": {
+      "network": "CBS",
+      "twitter_handle": "@MyDadSays_CBS"
+    },
+    "Go On": {
+      "network": "NBC",
+      "twitter_handle": "@NBCGo_On"
+    },
+    "Lie to Me": {
+      "network": "FOX",
+      "twitter_handle": "@LietoMeonFOX"
+    },
+    "Magic City": {
+      "network": "",
+      "twitter_handle": "@magiccity_starz"
+    },
+    "Hotel Hell": {
+      "network": "FOX",
+      "twitter_handle": "@HotelHellonFOX"
+    },
+    "Fairly Legal": {
+      "network": "USA Network",
+      "twitter_handle": "@FairlyLegal"
+    },
+    "Last Resort": {
+      "network": "ABC",
+      "twitter_handle": "@LastResort_ABC"
+    },
+    "The Tenth Inning (Ken Burns)": {
+      "network": "",
+      "twitter_handle": "@kenburnspbs"
+    },
+    "Ugly Americans": {
+      "network": "Comedy Central",
+      "twitter_handle": "@UglyAmericans"
+    },
+    "The Boondocks": {
+      "network": "",
+      "twitter_handle": "@UncleRuckusMovi"
+    },
+    "Mob Wives": {
+      "network": "",
+      "twitter_handle": "@FantasyDailys"
+    },
+    "Cold Case": {
+      "network": "CBS",
+      "twitter_handle": "@ColdCase_CBS"
+    },
+    "The Comedy Awards": {
+      "network": "Comedy Central",
+      "twitter_handle": "@TheComedyAwards"
+    },
+    "Medium": {
+      "network": "CBS",
+      "twitter_handle": "@Medium_CBS"
+    },
+    "The Legend of Neil": {
+      "network": "Comedy Central",
+      "twitter_handle": "@legendofneil"
+    },
+    "Brothers and Sisters": {
+      "network": "ABC",
+      "twitter_handle": "@BrosAndSis_ABC"
+    },
+    "Oprah Presents Master Class": {
+      "network": "OWN (Oprah Winfrey Network)",
+      "twitter_handle": "@OWN_MasterClass"
+    },
+    "Partners": {
+      "network": "CBS",
+      "twitter_handle": "@Partners_CBS"
+    },
+    "Guys with Kids": {
+      "network": "NBC",
+      "twitter_handle": "@NBCGuyswithKids"
+    },
+    "Vegas": {
+      "network": "CBS",
+      "twitter_handle": "@Vegas_CBS"
+    },
+    "Atom.com": {
+      "network": "Comedy Central",
+      "twitter_handle": "@CC_Studios"
+    },
+    "Animal Practice": {
+      "network": "NBC",
+      "twitter_handle": "@AnimalPractice"
+    },
+    "No Ordinary Family": {
+      "network": "ABC",
+      "twitter_handle": "@NoOrdFamilyABC"
+    },
+    "Ben and Kate": {
+      "network": "FOX",
+      "twitter_handle": "@BenandKateFOX"
+    },
+    "The Mob Doctor": {
+      "network": "FOX",
+      "twitter_handle": "@TheMobDoctorFOX"
+    },
+    "Our America with Lisa Ling": {
+      "network": "OWN (Oprah Winfrey Network)",
+      "twitter_handle": "@OWN_OurAmerica"
+    },
+    "Sports Show with Norm Macdonald": {
+      "network": "Comedy Central",
+      "twitter_handle": "@normsportsshow"
+    },
+    "Human Target": {
+      "network": "FOX",
+      "twitter_handle": "@HumanTargetFOX"
+    },
+    "Dollhouse": {
+      "network": "FOX",
+      "twitter_handle": "@DOLLHOUSEonFOX"
+    },
+    "In the Bedroom with Dr. Laura Berman": {
+      "network": "OWN (Oprah Winfrey Network)",
+      "twitter_handle": "@OWNInTheBedroom"
+    },
+    "Flash Forward": {
+      "network": "ABC",
+      "twitter_handle": "@TheFlashForward"
+    },
+    "Mystery Diagnosis": {
+      "network": "OWN (Oprah Winfrey Network)",
+      "twitter_handle": "@OWN_Mystery"
+    },
+    "Detroit 1-8-7": {
+      "network": "ABC",
+      "twitter_handle": "@Detroit187ABC"
+    },
+    "Made in Jersey": {
+      "network": "CBS",
+      "twitter_handle": "@MadeInJerseyCBS"
+    },
+    "Deadliest Warrior": {
+      "network": "Spike",
+      "twitter_handle": "@SpikeTVDW"
+    },
+    "The Defenders": {
+      "network": "CBS",
+      "twitter_handle": "@TheDefendersCBS"
+    },
+    "The Good Guys": {
+      "network": "FOX",
+      "twitter_handle": "@GoodGuysonFOX"
+    },
+    "NYC 22": {
+      "network": "CBS",
+      "twitter_handle": "@NYC22_CBS"
+    },
+    "Running Wilde": {
+      "network": "FOX",
+      "twitter_handle": "@RunningWildeFOX"
+    },
+    "My Generation": {
+      "network": "ABC",
+      "twitter_handle": "@MyGenerationABC"
+    },
+    "Coal": {
+      "network": "Spike",
+      "twitter_handle": "@COAL_SPIKE"
+    },
+    "The Whole Truth": {
+      "network": "ABC",
+      "twitter_handle": "@WholeTruthABC"
+    },
+    "Deliver Me": {
+      "network": "OWN (Oprah Winfrey Network)",
+      "twitter_handle": "@OWN_DeliverMe"
+    },
+    "Lone Star": {
+      "network": "FOX",
+      "twitter_handle": "@LoneStaronFOX"
+    }
+  },
+  "network_data": {
+    "MTV": {
+      "network": "MTV",
+      "twitter_handle": "@MTV"
+    },
+    "Nickelodeon": {
+      "network": "Nickelodeon",
+      "twitter_handle": "@NickelodeonTV"
+    },
+    "Discovery Channel": {
+      "network": "Discovery Channel",
+      "twitter_handle": "@Discovery"
+    },
+    "History": {
+      "network": "History",
+      "twitter_handle": "@HISTORY"
+    },
+    "Comedy Central": {
+      "network": "Comedy Central",
+      "twitter_handle": "@ComedyCentral"
+    },
+    "Travel Channel": {
+      "network": "Travel Channel",
+      "twitter_handle": "@travelchannel"
+    },
+    "HBO": {
+      "network": "HBO",
+      "twitter_handle": "@HBO"
+    },
+    "NBC": {
+      "network": "NBC",
+      "twitter_handle": "@nbc"
+    },
+    "Bravo": {
+      "network": "Bravo",
+      "twitter_handle": "@Bravotv"
+    },
+    "OWN (Oprah Winfrey Network)": {
+      "network": "OWN (Oprah Winfrey Network)",
+      "twitter_handle": "@OWNTV"
+    },
+    "TLC": {
+      "network": "TLC",
+      "twitter_handle": "@TLC"
+    },
+    "CBS": {
+      "network": "CBS",
+      "twitter_handle": "@CBSTweet"
+    },
+    "Spike": {
+      "network": "Spike",
+      "twitter_handle": "@spike"
+    },
+    "Syfy": {
+      "network": "Syfy",
+      "twitter_handle": "@Syfy"
+    },
+    "USA Network": {
+      "network": "USA Network",
+      "twitter_handle": "@USA_Network"
+    },
+    "TNT": {
+      "network": "TNT",
+      "twitter_handle": "@tntdrama"
+    },
+    "TV Land": {
+      "network": "TV Land",
+      "twitter_handle": "@tvland"
+    }
+  }
+}
