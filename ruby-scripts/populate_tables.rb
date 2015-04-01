@@ -1,18 +1,14 @@
-require 'net/http'
-require 'uri'
 require 'json'
-# require 'active_support'
 require 'mysql2'
 
 require_relative 'constants.rb'
 
-@table = 'caramcc_tv_shows'
 @available_keys = %w(title country tvrage_id start_date end_date classification genres runtime network
   airtime airday alternate_titles flagged imdb_id languages writers actors plot_summary award_wins
   award_nominations imdb_rating imdb_votes flag)
 
 def load_data
-  all_data = []
+  all_show_data = []
   Dir.entries('output-data').drop(2).each do |file_path|
     File.open(File.join('output-data', file_path), "r") do |f|
       f.each_line do |line|
@@ -24,7 +20,7 @@ def load_data
       end
     end
   end
-  all_data
+  all_show_data
 end
 
 @client = Mysql2::Client.new(:host => $host, :username => $username, :password => $password)
@@ -33,36 +29,6 @@ end
 @client.query("USE #{$db_name}")
 
 # @client.query("DROP TABLE #{@table}")
-
-@client.query("CREATE TABLE IF NOT EXISTS #{$tv_shows} (
-  show_id int(11) NOT NULL AUTO_INCREMENT,
-  show_title varchar(255) NOT NULL DEFAULT '',
-  country varchar(255) NOT NULL DEFAULT '',
-  start_date date NOT NULL DEFAULT '1000-01-01',
-  end_date date,
-  content_rating varchar(11) NOT NULL DEFAULT '',
-  classification varchar(255) NOT NULL DEFAULT '',
-  genres varchar(2047) NOT NULL DEFAULT '',
-  runtime int(11) NOT NULL DEFAULT '0',
-  network varchar(255) NOT NULL DEFAULT '',
-  airtime varchar(11) NOT NULL DEFAULT '',
-  timezone varchar(63) NOT NULL DEFAULT '',
-  airdays varchar(2047) NOT NULL DEFAULT '',
-  languages varchar(2047) NOT NULL DEFAULT '',
-  writers varchar(2047) NOT NULL DEFAULT '',
-  actors varchar(2047) NOT NULL DEFAULT '',
-  plot_summary text(8191) NOT NULL,
-  alternate_titles varchar(2047) NOT NULL DEFAULT '',
-  award_nominations int(11) NOT NULL DEFAULT '0',
-  award_wins int(11) NOT NULL DEFAULT '0',
-  imdb_rating float(8,3) NOT NULL DEFAULT '0',
-  imdb_votes int(11) NOT NULL DEFAULT '0',
-  imdb_id varchar(11) NOT NULL DEFAULT '',
-  tvrage_id int(11) NOT NULL DEFAULT '0',
-  flagged tinyint(1) NOT NULL DEFAULT '0',
-  flag varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (show_id)
-);")
 
 
 
@@ -113,19 +79,33 @@ def process_data(data_array)
         flagged = 0
       end
 
-      insert_query = "INSERT INTO #{@table} (show_title, country, start_date, end_date, 
-        content_rating, classification, genres, runtime, network, airtime, timezone, 
-        airdays, languages, writers, actors, plot_summary, alternate_titles, award_nominations,
+      insert_into_shows = "INSERT INTO #{$tv_shows} (show_title, country, start_date, end_date,
+        content_rating, classification, runtime, network, airtime, timezone,
+        airdays, plot_summary, alternate_titles, award_nominations,
         award_wins, imdb_rating, imdb_votes, imdb_id, tvrage_id, flagged, flag) VALUES (
         '#{row["title"]}', '#{row["country"]}', '#{start_date}', '#{end_date}',
-        '#{row["content_rating"]}', '#{row["classification"]}', '#{row["genres"]}', '#{runtime}',
-        '#{row["network"]}', '#{airtime}', '#{timezone}', '#{row["airday"]}', '#{row["languages"]}',
-        '#{row["writers"]}', '#{row["actors"]}', '#{row["plot_summary"]}', 
+        '#{row["content_rating"]}', '#{row["classification"]}', '#{runtime}',
+        '#{row["network"]}', '#{airtime}', '#{timezone}', '#{row["airday"]}', '#{row["plot_summary"]}',
         '#{row["alternate_titles"]}', '#{award_nominations}', '#{award_wins}', 
         '#{imdb_rating}', '#{imdb_votes}', '#{row["imdb_id"]}', '#{tvrage_id}', '#{flagged}', 
         '#{row["flag"]}'
         );"
-      @client.query(insert_query)
+      @client.query(insert_into_shows)
+
+      show_id = 0
+      @client.query("SELECT show_id FROM #{$tv_shows} WHERE show_title = '#{row["title"]}' AND network='#{row["network"]}';").each do |id|
+        show_id = id
+      end
+
+      row['genres'].each do |genre|
+        @client.query("INSERT INTO #{$show_genres} (show_id, genre) VALUES (#{show_id}, #{genre});")
+      end
+
+      row['languages'].each do |genre|
+        @client.query("INSERT INTO #{$show_genres} (show_id, genre) VALUES (#{show_id}, #{genre});")
+      end
+
+
     end
   end
 end
