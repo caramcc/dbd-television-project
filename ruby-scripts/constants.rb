@@ -1,10 +1,11 @@
-$tv_shows = 'caramcc_tv_shows'
+$tv_shows = 'caramcc_tv_shows2'
 $actors = 'caramcc_actors'
 $show_actors = 'caramcc_show_actors'
 $creators = 'caramcc_creators'
 $show_creators = 'caramcc_show_creators'
 
 $show_genres = 'caramcc_show_genres'
+$show_airdays = 'caramcc_show_airdays'
 $show_languages = 'caramcc_show_languages'
 
 $networks = 'caramcc_networks'

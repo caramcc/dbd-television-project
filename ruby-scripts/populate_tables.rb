@@ -31,7 +31,6 @@ end
 # @client.query("DROP TABLE #{@table}")
 
 
-
 def process_data(data_array)
   data_array.each do |row|
     unless row["title"].nil? && row["imdb_id"].nil?
@@ -64,7 +63,8 @@ def process_data(data_array)
       award_wins = row["award_wins"].to_i
       award_nominations = row["award_nominations"].to_i
       if row["airtime"].nil?
-        
+        airtime = ''
+        timezone = ''
       else
         airtime = row["airtime"].split(" ")[0]
         timezone = row["airtime"].split(" ").drop(1).join(" ") # gross
@@ -81,11 +81,11 @@ def process_data(data_array)
 
       insert_into_shows = "INSERT INTO #{$tv_shows} (show_title, country, start_date, end_date,
         content_rating, classification, runtime, network, airtime, timezone,
-        airdays, plot_summary, alternate_titles, award_nominations,
+        plot_summary, alternate_titles, award_nominations,
         award_wins, imdb_rating, imdb_votes, imdb_id, tvrage_id, flagged, flag) VALUES (
         '#{row["title"]}', '#{row["country"]}', '#{start_date}', '#{end_date}',
         '#{row["content_rating"]}', '#{row["classification"]}', '#{runtime}',
-        '#{row["network"]}', '#{airtime}', '#{timezone}', '#{row["airday"]}', '#{row["plot_summary"]}',
+        '#{row["network"]}', '#{airtime}', '#{timezone}', '#{row["plot_summary"]}',
         '#{row["alternate_titles"]}', '#{award_nominations}', '#{award_wins}', 
         '#{imdb_rating}', '#{imdb_votes}', '#{row["imdb_id"]}', '#{tvrage_id}', '#{flagged}', 
         '#{row["flag"]}'
@@ -93,16 +93,61 @@ def process_data(data_array)
       @client.query(insert_into_shows)
 
       show_id = 0
-      @client.query("SELECT show_id FROM #{$tv_shows} WHERE show_title = '#{row["title"]}' AND network='#{row["network"]}';").each do |id|
-        show_id = id
+      @client.query("SELECT show_id FROM #{$tv_shows} ORDER BY show_id DESC LIMIT 1;").each do |id|
+        show_id = id['show_id']
       end
 
       row['genres'].each do |genre|
         @client.query("INSERT INTO #{$show_genres} (show_id, genre) VALUES (#{show_id}, #{genre});")
       end
 
-      row['languages'].each do |genre|
-        @client.query("INSERT INTO #{$show_genres} (show_id, genre) VALUES (#{show_id}, #{genre});")
+      row['languages'].each do |language|
+        @client.query("INSERT INTO #{$show_languages} (show_id, language) VALUES (#{show_id}, #{language});")
+      end
+
+      row['airday'].each do |airday|
+        @client.query("INSERT INTO #{$show_airdays} (show_id, airday) VALUES (#{show_id}, #{airday});")
+      end
+
+      row['actors'].each do |actor|
+
+        actor_id = 0
+        @client.query("SELECT actor_id FROM #{$actors} WHERE actor_name LIKE '#{actor}');").each do |actors|
+          actor_id = actors['actor_id']
+        end
+
+        if actor_id == 0 # (if actor doesn't exist)
+          @client.query("INSERT INTO #{$actors} (actor_name) VALUES (#{actor}")
+
+          @client.query("SELECT actor_id FROM #{$actors} ORDER BY creator_id DESC LIMIT 1;").each do |id|
+            actor_id = id['actor_id']
+          end
+
+        end
+
+        # map
+        @client.query("INSERT INTO #{$show_actors} (show_id, actor_id) VALUES (#{show_id}, #{actor_id});")
+      end
+
+
+      row['creators'].each do |creator|
+
+        creator_id = 0
+        @client.query("SELECT creator_id FROM #{$creators} WHERE actor_name LIKE '#{creator}');").each do |creators|
+          creator_id = creators['creator_id']
+        end
+
+        if creator_id == 0 # (if actor doesn't exist)
+          @client.query("INSERT INTO #{$creators} (actor_name) VALUES (#{creator}")
+
+          @client.query("SELECT creator_id FROM #{$actors} ORDER BY creator_id DESC LIMIT 1;").each do |id|
+            creator_id = id['creator_id']
+          end
+
+        end
+
+        # map
+        @client.query("INSERT INTO #{$show_creators} (show_id, creator_id) VALUES (#{show_id}, #{creator_id});")
       end
 
 
