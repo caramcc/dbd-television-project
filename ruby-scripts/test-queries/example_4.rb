@@ -1,37 +1,21 @@
 require 'net/http'
 require 'json'
-# require 'active_support'
 require 'mysql2'
 
 @table = 'caramcc_tv_shows'
-
-# def load_data
-#   all_data = []
-#   Dir.entries('output-data2').drop(2).each do |file_path|
-#     File.open(File.join('output-data2', file_path), "r") do |f|
-#       f.each_line do |line|
-#         all_data.push JSON.parse(line)
-#       end
-#     end
-#   end
-#   all_data
-# end
+@database = 'caramcc_dbd_project'
 
 @client = Mysql2::Client.new(:host => "localhost", :username => "root")
 
-@client.query("USE caramcc_dbd_project")
+@client.query("USE #{@database}")
 
-# result = @client.query("SELECT * FROM #{@table}")
+# Example 4
+# I want to determine which languages a given TV Show was broadcast in.
 
-# result.each do |row|
-#   puts row["show_title"]
-# end
+tv_show = 'Breaking Bad'
 
-title = ARGV[0]
-
-result = @client.query("SELECT languages FROM #{@table} WHERE show_title LIKE '%#{title}%';")
+result = @client.query("SELECT * FROM #{@table} WHERE actors LIKE '%#{tv_show}%';")
 
 result.each do |row|
-  languages = row["languages"].split(',')
-  puts languages.length
+  puts row['show_title']
 end
