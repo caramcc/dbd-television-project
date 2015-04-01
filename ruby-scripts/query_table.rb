@@ -1,26 +1,11 @@
-require 'net/http'
-require "uri"
 require 'json'
-# require 'active_support'
 require 'mysql2'
 
-@table = 'caramcc_tv_shows'
+require_relative 'constants.rb'
 
-# def load_data
-#   all_data = []
-#   Dir.entries('output-data2').drop(2).each do |file_path|
-#     File.open(File.join('output-data2', file_path), "r") do |f|
-#       f.each_line do |line|
-#         all_data.push JSON.parse(line)
-#       end
-#     end
-#   end
-#   all_data
-# end
+@client = Mysql2::Client.new(:host => $host, :username => $username, :password => $password)
 
-@client = Mysql2::Client.new(:host => "localhost", :username => "root")
-
-@client.query("USE caramcc_dbd_project")
+@client.query("USE #{$db_name}")
 
 # result = @client.query("SELECT * FROM #{@table}")
 
@@ -31,7 +16,7 @@ require 'mysql2'
 show_title = ARGV[0]
 show_network = ARGV[1]
 
-result = @client.query("SELECT * FROM #{@table} WHERE show_title LIKE '%#{show_title}%' AND network LIKE '%#{show_network}%';")
+result = @client.query("SELECT * FROM #{$tv_shows} WHERE show_title LIKE '%#{show_title}%' AND network LIKE '%#{show_network}%';")
 
 result.each do |row|
  puts row['show_title']

@@ -4,12 +4,12 @@ require 'json'
 # require 'active_support'
 require 'mysql2'
 
-@table = 'caramcc_tv_shows'
+require_relative 'constants'
 
 
-@client = Mysql2::Client.new(:host => "localhost", :username => "root")
+@client = Mysql2::Client.new(:host => $host, :username => $username)
 
-@client.query("USE caramcc_dbd_project")
+@client.query("USE #{$db_name}")
 
 result = @client.query("SELECT * FROM #{@table} WHERE flagged=1;")
 

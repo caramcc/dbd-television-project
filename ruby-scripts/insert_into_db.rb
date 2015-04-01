@@ -4,6 +4,8 @@ require 'json'
 # require 'active_support'
 require 'mysql2'
 
+require_relative 'constants.rb'
+
 @table = 'caramcc_tv_shows'
 @available_keys = %w(title country tvrage_id start_date end_date classification genres runtime network
   airtime airday alternate_titles flagged imdb_id languages writers actors plot_summary award_wins
@@ -25,19 +27,19 @@ def load_data
   all_data
 end
 
-@client = Mysql2::Client.new(:host => "localhost", :username => "root")
+@client = Mysql2::Client.new(:host => $host, :username => $username, :password => $password)
 
 
-@client.query("USE caramcc_dbd_project")
+@client.query("USE #{$db_name}")
 
 # @client.query("DROP TABLE #{@table}")
 
-@client.query("CREATE TABLE IF NOT EXISTS #{@table} (
+@client.query("CREATE TABLE IF NOT EXISTS #{$tv_shows} (
   show_id int(11) NOT NULL AUTO_INCREMENT,
   show_title varchar(255) NOT NULL DEFAULT '',
   country varchar(255) NOT NULL DEFAULT '',
   start_date date NOT NULL DEFAULT '1000-01-01',
-  end_date date NOT NULL DEFAULT '1000-01-01',
+  end_date date,
   content_rating varchar(11) NOT NULL DEFAULT '',
   classification varchar(255) NOT NULL DEFAULT '',
   genres varchar(2047) NOT NULL DEFAULT '',
