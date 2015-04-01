@@ -1,6 +1,6 @@
 {
   "show_data": {
-    "Ellen DeGneres (The Ellen Show)": {
+    "Ellen DeGeneres (The Ellen Show)": {
       "network": "TV Host",
       "twitter_handle": "@TheEllenShow"
     },
@@ -139,10 +139,6 @@
     "Suze Orman": {
       "network": "TV Host",
       "twitter_handle": "@SuzeOrmanShow"
-    },
-    "MTV UK": {
-      "network": "MTV",
-      "twitter_handle": "@MTVUK"
     },
     "Grey's Anatomy": {
       "network": "ABC",
@@ -489,7 +485,7 @@
       "twitter_handle": "@nbcchuck"
     },
     "Spartacus": {
-      "network": "",
+      "network": "Starz",
       "twitter_handle": "@spartacus_starz"
     },
     "The Oprah Show": {
@@ -633,7 +629,7 @@
       "twitter_handle": "@ccstandup"
     },
     "Da Vinci's Demons": {
-      "network": "",
+      "network": "Starz",
       "twitter_handle": "@DaVincis_Starz"
     },
     "Harry's Law": {
@@ -717,7 +713,7 @@
       "twitter_handle": "@JeffProbstShow"
     },
     "Boss": {
-      "network": "",
+      "network": "Starz",
       "twitter_handle": "@Boss_Starz"
     },
     "GCB": {
@@ -785,7 +781,7 @@
       "twitter_handle": "@LietoMeonFOX"
     },
     "Magic City": {
-      "network": "",
+      "network": "Starz",
       "twitter_handle": "@magiccity_starz"
     },
     "Hotel Hell": {
@@ -1013,6 +1009,10 @@
     "TNT": {
       "network": "TNT",
       "twitter_handle": "@tntdrama"
+    },
+    "MTV UK": {
+      "network": "MTV",
+      "twitter_handle": "@MTVUK"
     },
     "TV Land": {
       "network": "TV Land",
