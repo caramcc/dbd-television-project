@@ -169,7 +169,7 @@ def process_data(data_array)
           if creator_id == 0 # (if actor doesn't exist)
             @client.query("INSERT INTO #{$creators} (creator_name) VALUES ('#{creator}')")
 
-            @client.query("SELECT creator_id FROM #{$actors} ORDER BY creator_id DESC LIMIT 1;").each do |id|
+            @client.query("SELECT creator_id FROM #{$creators} ORDER BY creator_id DESC LIMIT 1;").each do |id|
               creator_id = id['creator_id']
             end
 
