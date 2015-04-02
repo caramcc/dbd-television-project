@@ -13,7 +13,7 @@ def load_data
     File.open(File.join('output-data', file_path), "r") do |f|
       f.each_line do |line|
         begin
-          all_data.push JSON.parse(line)
+          all_show_data.push JSON.parse(line)
         rescue JSON::ParserError => e
           puts line
         end
@@ -44,8 +44,8 @@ def process_data(data_array)
       row.each do |key, value|
         if value.instance_of?(String)
           row[key] = @client.escape(value)
-        elsif value.instance_of?(Hash) || value.instance_of?(Array)
-          row[key] = @client.escape(value.to_s)
+        # elsif value.instance_of?(Hash) || value.instance_of?(Array)
+        #   row[key] = @client.escape(value.to_s)
         end
       end
 
@@ -53,8 +53,8 @@ def process_data(data_array)
         start_date = Date.parse(row["start_date"]).to_s
         end_date = Date.parse(row["end_date"]).to_s
       rescue ArgumentError, TypeError # if invalid dates
-        puts start_date
-        puts end_date
+        # puts start_date
+        # puts end_date
         start_date ||= '1000-01-01'
         end_date ||= '1000-01-01'
       end
@@ -81,12 +81,11 @@ def process_data(data_array)
 
       insert_into_shows = "INSERT INTO #{$tv_shows} (show_title, country, start_date, end_date,
         content_rating, classification, runtime, network, airtime, timezone,
-        plot_summary, alternate_titles, award_nominations,
+        plot_summary, award_nominations,
         award_wins, imdb_rating, imdb_votes, imdb_id, tvrage_id, flagged, flag) VALUES (
         '#{row["title"]}', '#{row["country"]}', '#{start_date}', '#{end_date}',
         '#{row["content_rating"]}', '#{row["classification"]}', '#{runtime}',
-        '#{row["network"]}', '#{airtime}', '#{timezone}', '#{row["plot_summary"]}',
-        '#{row["alternate_titles"]}', '#{award_nominations}', '#{award_wins}', 
+        '#{row["network"]}', '#{airtime}', '#{timezone}', '#{row["plot_summary"]}', '#{award_nominations}', '#{award_wins}',
         '#{imdb_rating}', '#{imdb_votes}', '#{row["imdb_id"]}', '#{tvrage_id}', '#{flagged}', 
         '#{row["flag"]}'
         );"
@@ -97,57 +96,88 @@ def process_data(data_array)
         show_id = id['show_id']
       end
 
-      row['genres'].each do |genre|
-        @client.query("INSERT INTO #{$show_genres} (show_id, genre) VALUES (#{show_id}, #{genre});")
-      end
-
-      row['languages'].each do |language|
-        @client.query("INSERT INTO #{$show_languages} (show_id, language) VALUES (#{show_id}, #{language});")
-      end
-
-      row['airday'].each do |airday|
-        @client.query("INSERT INTO #{$show_airdays} (show_id, airday) VALUES (#{show_id}, #{airday});")
-      end
-
-      row['actors'].each do |actor|
-
-        actor_id = 0
-        @client.query("SELECT actor_id FROM #{$actors} WHERE actor_name LIKE '#{actor}');").each do |actors|
-          actor_id = actors['actor_id']
+      if row['genres'].instance_of?(Array)
+        row['genres'].each do |genre|
+          begin
+            genre = @client.escape(genre)
+            @client.query("INSERT INTO #{$show_genres} (show_id, genre) VALUES (#{show_id}, '#{genre}');")
+          rescue TypeError
+            genre.each do |key, value|
+              puts "#{key} => #{value}"
+            end
+          end
         end
+      end
 
-        if actor_id == 0 # (if actor doesn't exist)
-          @client.query("INSERT INTO #{$actors} (actor_name) VALUES (#{actor}")
+      if row['languages'].instance_of?(Array)
+        row['languages'].each do |language|
+          language = @client.escape(language)
+          @client.query("INSERT INTO #{$show_languages} (show_id, language) VALUES (#{show_id}, '#{language}');")
+        end
+      end
 
-          @client.query("SELECT actor_id FROM #{$actors} ORDER BY creator_id DESC LIMIT 1;").each do |id|
-            actor_id = id['actor_id']
+      if row['airday'].instance_of?(Array)
+        row['airday'].each do |airday|
+          airday = @client.escape(airday)
+          @client.query("INSERT INTO #{$show_airdays} (show_id, airday) VALUES (#{show_id}, '#{airday}');")
+        end
+      end
+
+      if row['alternate_titles'].instance_of?(Array)
+        row['alternate_titles'].each do |title|
+          title = @client.escape(title)
+          @client.query("INSERT INTO #{$show_alt_titles} (show_id, alt_title) VALUES (#{show_id}, '#{title}');")
+        end
+      end
+
+      if row['actors'].instance_of?(Array)
+        row['actors'].each do |actor|
+
+          actor = @client.escape(actor)
+          actor_id = 0
+          @client.query("SELECT actor_id FROM #{$actors} WHERE actor_name LIKE '#{actor}';").each do |actors|
+            actor_id = actors['actor_id']
+            puts "found #{actor}, id #{actor_id}"
           end
 
-        end
+          if actor_id == 0 # (if actor doesn't exist)
+            @client.query("INSERT INTO #{$actors} (actor_name) VALUES ('#{actor}')")
+            puts "inserting #{actor}"
 
-        # map
-        @client.query("INSERT INTO #{$show_actors} (show_id, actor_id) VALUES (#{show_id}, #{actor_id});")
+            @client.query("SELECT actor_id FROM #{$actors} ORDER BY actor_id DESC LIMIT 1;").each do |id|
+              actor_id = id['actor_id']
+            end
+
+          end
+
+          # map
+          @client.query("INSERT INTO #{$show_actors} (show_id, actor_id) VALUES (#{show_id}, #{actor_id});")
+        end
       end
 
 
-      row['creators'].each do |creator|
+      if row['creators'].instance_of?(Array)
+        row['creators'].each do |creator|
 
-        creator_id = 0
-        @client.query("SELECT creator_id FROM #{$creators} WHERE actor_name LIKE '#{creator}');").each do |creators|
-          creator_id = creators['creator_id']
-        end
+          creator = @client.escape(creator)
 
-        if creator_id == 0 # (if actor doesn't exist)
-          @client.query("INSERT INTO #{$creators} (actor_name) VALUES (#{creator}")
-
-          @client.query("SELECT creator_id FROM #{$actors} ORDER BY creator_id DESC LIMIT 1;").each do |id|
-            creator_id = id['creator_id']
+          creator_id = 0
+          @client.query("SELECT creator_id FROM #{$creators} WHERE actor_name LIKE '#{creator}');").each do |creators|
+            creator_id = creators['creator_id']
           end
 
-        end
+          if creator_id == 0 # (if actor doesn't exist)
+            @client.query("INSERT INTO #{$creators} (actor_name) VALUES ('#{creator}')")
 
-        # map
-        @client.query("INSERT INTO #{$show_creators} (show_id, creator_id) VALUES (#{show_id}, #{creator_id});")
+            @client.query("SELECT creator_id FROM #{$actors} ORDER BY creator_id DESC LIMIT 1;").each do |id|
+              creator_id = id['creator_id']
+            end
+
+          end
+
+          # map
+          @client.query("INSERT INTO #{$show_creators} (show_id, creator_id) VALUES (#{show_id}, #{creator_id});")
+        end
       end
 
 

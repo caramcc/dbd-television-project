@@ -19,5 +19,5 @@ show_network = ARGV[1]
 result = @client.query("SELECT * FROM #{$tv_shows} WHERE show_title LIKE '%#{show_title}%' AND network LIKE '%#{show_network}%';")
 
 result.each do |row|
- puts row
+ puts row['show_title']
 end

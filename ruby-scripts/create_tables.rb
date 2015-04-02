@@ -7,7 +7,16 @@ require_relative 'constants.rb'
 
 @client.query("USE #{$db_name}")
 
-# @client.query("DROP TABLE #{@table}")
+@client.query("DROP TABLE #{$show_alt_titles}")
+@client.query("DROP TABLE #{$show_actors}")
+@client.query("DROP TABLE #{$show_creators}")
+@client.query("DROP TABLE #{$show_genres}")
+@client.query("DROP TABLE #{$show_languages}")
+@client.query("DROP TABLE #{$show_airdays}")
+@client.query("DROP TABLE #{$tv_shows}")
+@client.query("DROP TABLE #{$actors}")
+@client.query("DROP TABLE #{$creators}")
+@client.query("DROP TABLE #{$networks}")
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$tv_shows} (
   show_id int(11) NOT NULL AUTO_INCREMENT,
@@ -35,6 +44,11 @@ require_relative 'constants.rb'
   PRIMARY KEY (show_id)
 );")
 
+@client.query("CREATE TABLE IF NOT EXISTS #{$networks} (
+  network_name varchar(255) NOT NULL DEFAULT '',
+  network_twitter_id varchar(63),
+  PRIMARY KEY (network_name)
+);")
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$actors} (
   actor_id int(11) NOT NULL AUTO_INCREMENT,
@@ -47,7 +61,7 @@ require_relative 'constants.rb'
   creator_id int(11) NOT NULL AUTO_INCREMENT,
   creator_name varchar(255) NOT NULL DEFAULT '',
   creator_twitter_id varchar(63),
-  PRIMARY KEY (actor_id)
+  PRIMARY KEY (creator_id)
 );")
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$show_actors} (
@@ -68,6 +82,18 @@ require_relative 'constants.rb'
 @client.query("CREATE TABLE IF NOT EXISTS #{$show_genres} (
   show_id int(11) NOT NULL,
   genre varchar(255) NOT NULL DEFAULT '',
+  FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id)
+);")
+
+@client.query("CREATE TABLE IF NOT EXISTS #{$show_airdays} (
+  show_id int(11) NOT NULL,
+  airday varchar(255) NOT NULL DEFAULT '',
+  FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id)
+);")
+
+@client.query("CREATE TABLE IF NOT EXISTS #{$show_alt_titles} (
+  show_id int(11) NOT NULL,
+  alt_title varchar(255) NOT NULL DEFAULT '',
   FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id)
 );")
 

@@ -7,6 +7,7 @@ $show_creators = 'caramcc_show_creators'
 $show_genres = 'caramcc_show_genres'
 $show_airdays = 'caramcc_show_airdays'
 $show_languages = 'caramcc_show_languages'
+$show_alt_titles = 'caramcc_show_alt_titles'
 
 $networks = 'caramcc_networks'
 
