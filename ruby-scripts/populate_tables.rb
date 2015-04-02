@@ -162,12 +162,12 @@ def process_data(data_array)
           creator = @client.escape(creator)
 
           creator_id = 0
-          @client.query("SELECT creator_id FROM #{$creators} WHERE actor_name LIKE '#{creator}';").each do |creators|
+          @client.query("SELECT creator_id FROM #{$creators} WHERE creator_name LIKE '#{creator}';").each do |creators|
             creator_id = creators['creator_id']
           end
 
           if creator_id == 0 # (if actor doesn't exist)
-            @client.query("INSERT INTO #{$creators} (actor_name) VALUES ('#{creator}')")
+            @client.query("INSERT INTO #{$creators} (creator_name) VALUES ('#{creator}')")
 
             @client.query("SELECT creator_id FROM #{$actors} ORDER BY creator_id DESC LIMIT 1;").each do |id|
               creator_id = id['creator_id']
