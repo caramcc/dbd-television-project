@@ -80,12 +80,12 @@ def process_data(data_array)
       end
 
       insert_into_shows = "INSERT INTO #{$tv_shows} (show_title, country, start_date, end_date,
-        content_rating, classification, runtime, network, airtime, timezone,
+        content_rating, classification, runtime, airtime, timezone,
         plot_summary, award_nominations,
         award_wins, imdb_rating, imdb_votes, imdb_id, tvrage_id, flagged, flag) VALUES (
         '#{row["title"]}', '#{row["country"]}', '#{start_date}', '#{end_date}',
-        '#{row["content_rating"]}', '#{row["classification"]}', '#{runtime}',
-        '#{row["network"]}', '#{airtime}', '#{timezone}', '#{row["plot_summary"]}', '#{award_nominations}', '#{award_wins}',
+        '#{row["content_rating"]}', '#{row["classification"]}', '#{runtime}', '#{airtime}', '#{timezone}',
+        '#{row["plot_summary"]}', '#{award_nominations}', '#{award_wins}',
         '#{imdb_rating}', '#{imdb_votes}', '#{row["imdb_id"]}', '#{tvrage_id}', '#{flagged}', 
         '#{row["flag"]}'
         );"
@@ -94,6 +94,17 @@ def process_data(data_array)
       show_id = 0
       @client.query("SELECT show_id FROM #{$tv_shows} ORDER BY show_id DESC LIMIT 1;").each do |id|
         show_id = id['show_id']
+      end
+
+      network_exists = false
+      @client.query("SELECT COUNT(*) FROM #{$networks} WHERE network_name = '#{row['network']}'").each do |result|
+        if result['COUNT(*)'] > 0
+          network_exists = true
+        end
+      end
+
+      unless network_exists
+        @client.query("INSERT INTO #{$networks} (network_name) VALUES ('#{row['network']}')")
       end
 
       if row['genres'].instance_of?(Array)
