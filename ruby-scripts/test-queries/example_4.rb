@@ -13,8 +13,11 @@ require_relative '../constants.rb'
 
 tv_show = 'Breaking Bad'
 
-result = @client.query("SELECT * FROM #{$tv_shows} WHERE show_title LIKE '%#{tv_show}%';")
+result = @client.query("SELECT sl.*, s.show_id
+FROM #{$tv_shows} s
+JOIN #{$show_languages} sl ON sl.show_id = s.show_id
+WHERE show_title LIKE '#{tv_show}';")
 
 result.each do |row|
-  puts row['show_title']
+  puts row['language']
 end
