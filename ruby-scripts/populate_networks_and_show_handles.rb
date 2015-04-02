@@ -8,14 +8,17 @@ require_relative 'constants.rb'
 
 networks = []
 @client.query("SELECT network FROM #{$tv_shows};").each do |network|
-  networks.push network['network']
+  networks.push network['network'] unless network['network'].nil?
+  puts network
 end
 
-networks.uniq.each do |network|
-  unless network['network_name'].nil?
-    @client.query("INSERT INTO #{$networks} (network_name) VALUES ('#{network['network_name']}');")
-  end
-end
+networks = networks.map{|i| i.downcase}.uniq
+
+# networks.each do |network|
+#   unless network.nil? || network == ''
+#     @client.query("INSERT INTO #{$networks} (network_name) VALUES ('#{network}');")
+#   end
+# end
 
 file_path = 'caramcc_twitter_handles.json'
 file = File.read(file_path)
@@ -26,5 +29,5 @@ twitter_handle_data['show_data'].each do |show, handle|
 end
 
 twitter_handle_data['network_data'].each do |network, handle|
-  @client.query("INSERT INTO #{$networks}  (network_name, network_twitter_id) VALUES ('network', '#{handle['twitter_handle']}');")
+  @client.query("UPDATE #{$networks} SET network_twitter_id = '#{handle['twitter_handle']}' WHERE network_name LIKE '#{network}';")
 end
