@@ -14,9 +14,12 @@ require_relative '../constants.rb'
 creator = 'Abrams'
 
 result = @client.query(
-    "SELECT * FROM #{$creators} LIMIT 50")
+    "SELECT c.*, s.imdb_rating, s.show_title
+FROM #{$tv_shows} s
+JOIN #{$show_creators} sc ON sc.show_id = s.show_id
+JOIN #{$creators} c ON c.creator_id = sc.creator_id
+WHERE creator_name LIKE '%#{creator}%';")
 
 result.each do |row|
-  puts row['creator_name']
-  # puts row
+  puts row['show_title']
 end
