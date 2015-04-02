@@ -9,7 +9,7 @@ require_relative '../constants.rb'
 @client.query("USE #{$db_name}")
 
 # Example 6
-# I want to determine the Twitter Handle of the Network that has aired the most TV Shows in the United States.
+# I want to determine the Network that has aired the most TV Shows in the United States.
 
 
 # result = @client.query("SELECT *, COUNT( FROM #{$tv_shows} GROUP BY network ")
