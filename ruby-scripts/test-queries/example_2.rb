@@ -22,5 +22,5 @@ WHERE creator_name LIKE '%#{creator}%'
 ORDER BY s.imdb_rating ASC LIMIT 1")
 
 result.each do |row|
-  puts "#{row['show_title']} => #{row['imdb_rating']}"
+  puts row['show_title']
 end
