@@ -12,7 +12,7 @@ require_relative '../constants.rb'
 # I want to determine the titles of all the shows broadcast on NBC.
 
 
-result = @client.query("SELECT * FROM #{$tv_shows} WHERE network LIKE 'NBC' ")
+result = @client.query("SELECT show_title FROM #{$tv_shows} WHERE network LIKE 'NBC' ")
 
 result.each do |row|
   puts row['show_title']
