@@ -162,7 +162,7 @@ def process_data(data_array)
           creator = @client.escape(creator)
 
           creator_id = 0
-          @client.query("SELECT creator_id FROM #{$creators} WHERE actor_name LIKE '#{creator}');").each do |creators|
+          @client.query("SELECT creator_id FROM #{$creators} WHERE actor_name LIKE '#{creator}';").each do |creators|
             creator_id = creators['creator_id']
           end
 
