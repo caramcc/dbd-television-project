@@ -11,7 +11,7 @@ networks = []
   networks.push network['network']
 end
 
-networks.each do |network|
+networks.uniq.each do |network|
   unless network['network_name'].nil?
     @client.query("INSERT INTO #{$networks} (network_name) VALUES ('#{network['network_name']}');")
   end
