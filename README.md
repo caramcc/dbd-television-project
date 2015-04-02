@@ -21,6 +21,10 @@ The data was downloaded and reformatted using the following scripts, located in 
 
 - `scraperbot/twitter_handle_scraper.rb` - used to scrape twitter handles from FanPageList.
 
+- `populate_tables.rb` - used to fill the following tables: TV_Shows, Actors, Creators, the tables that map between them, and `show_genres`, `show_airdays`, `show_languages`, and `show_alt_titles`, which provide atomic representations of non-atomic data.
+
+- `populate_networks_and_show_handles.rb` - used to fill the Networks table, as well as to add twitter handle data about TV Shows and Networks.
+
 
 
 # Data Auditing
