@@ -156,8 +156,8 @@ def process_data(data_array)
       end
 
 
-      if row['creators'].instance_of?(Array)
-        row['creators'].each do |creator|
+      if row['writers'].instance_of?(Array)
+        row['writers'].each do |creator|
 
           creator = @client.escape(creator)
 

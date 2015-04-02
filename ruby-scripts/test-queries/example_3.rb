@@ -17,4 +17,5 @@ result = @client.query("SELECT * FROM #{$tv_shows} WHERE actors LIKE '%#{actor}%
 
 result.each do |row|
   puts row['show_title']
+  puts row
 end

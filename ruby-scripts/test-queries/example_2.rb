@@ -11,10 +11,12 @@ require_relative '../constants.rb'
 # Example 2
 # I want to determine which is the lowest-rated TV Show made by a given Creator.
 
-creator = 'J.J. Abrams'
+creator = 'Abrams'
 
-result = @client.query("SELECT * FROM #{$tv_shows} WHERE actors LIKE '%#{creator}%';")
+result = @client.query(
+    "SELECT * FROM #{$creators} LIMIT 50")
 
 result.each do |row|
-  puts row['show_title']
+  puts row['creator_name']
+  # puts row
 end
