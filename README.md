@@ -38,7 +38,14 @@ As the data is retrieved from the APIs, the `tv_show_data.rb` script checks for 
 
 ## Completeness:
 
-The data is generally complete (?)
+There isn't much data on how many TV Shows there are or have ever been overall. One unsourced answer on Answers.com suggested that there were upwards of 1,000,000, which seems incorrect.
+
+There are 45,639 TV Shows in my database.
+
+According to [The Benton Foundation](), in 2011 there were 1,774 TV channels. Assuming 12 distinct shows per channel per day (1 per hour, the rest being re-runs) for 5 days a week, with each show running for approximately 8 years (factoring in that many news programs will balance out shorter-lived scripted series) since 1970 (45 years ago) we have:
+1774 channels x 12 shows per channel per day x 5 days x 45 years / 8 years per show = 598,725 shows
+
+I have about 0.76% of all shows. Since many of these shows will be older, unpopular, or obscure, this seems somewhat reasonable, especially in the scope of shows people are currently tweeting about.
 
 ## Consistency/Uniformity:
 
@@ -47,15 +54,28 @@ The most frequent cause of inconsistency among the data comes from the TV Show n
 Most of the time, missing OMDb data implies that the show is very old and/or obscure. While these shows will still be added to the database (for now) their data might not be relevant or useful as it applies to TV Shows people are tweeting about.
 
 
-
 # SQL
 
-SQL to insert the data into my database
+SQL to insert the data into my database is found in: `populate_tables.rb` and `populate_networks_and_show_handles.rb`
 
-The data is cleaned on first insertion.
+The data is cleaned on first insertion. Code to clean the data is found in `populate_tables.rb`.
 
 
+# Tests
+
+Tests using the following use cases can be found in the `test-queries` directory. They are each named `example_n.rb` where n = the number given here:
+
+1. I want to determine the TV Show a given Actor has appeared in most recently.
+1. I want to determine which is the lowest-rated TV Show made by a given Creator.
+1. I want to determine which genres a given Actor appears in most frequently.
+1. I want to determine which languages a given TV Show was broadcast in.
+1. I want to determine which TV Show made by a given Creator had the most seasons.
+1. I want to determine the Twitter Handle of the Network that has aired the most TV Shows in the United States.
+1. I want to determine the average IMDB rating for shows aired on the network HBO.
+1. I want to determine the titles of all the shows broadcast on NBC.
+1. I want to determine how many TV Shows a given Creator has made.
+1. I want to determine which TV Show broadcast in the UK has received the most IMDB votes.
 
 # Database Schema
 
-![](uml-mar-31.png)
+![](uml-apr-1.png)
