@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS caramcc_tv_shows (
   flagged tinyint(1) NOT NULL DEFAULT '0',
   flag varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (show_id),
-  FOREIGN KEY (network_name) REFERENCES caramcc_networks (network_name)
+  FOREIGN KEY (network_name) REFERENCES caramcc_networks(network_name)
 );
 ```
 
@@ -144,16 +144,23 @@ CREATE TABLE IF NOT EXISTS caramcc_creators (
 
 
 
-## Table: `caramcc_`
+## Table: `caramcc_show_actors`
 
 ### SQL
 
 ```
+CREATE TABLE IF NOT EXISTS caramcc_show_actors (
+  show_id int(11) NOT NULL,
+  actor_id int(11) NOT NULL,
+  PRIMARY KEY (show_id, actor_id),
+  FOREIGN KEY (show_id) REFERENCES caramcc_tv_shows(show_id),
+  FOREIGN KEY (actor_id) REFERENCES caramcc_actors(actor_id)
+);
 ```
 
 ### 1NF
 
- - Table has a Primary Key: `id`
+ - Table has a Primary Key: `show_id, actor_id`
  - Values of each column are atomic
  - No repeating groups: no columns
 
@@ -167,16 +174,140 @@ CREATE TABLE IF NOT EXISTS caramcc_creators (
  - All fields depend on the primary key
 
 
-## Map Table: `caramcc_`
+
+## Table: `caramcc_show_creators`
 
 ### SQL
 
 ```
+CREATE TABLE IF NOT EXISTS caramcc_show_creators (
+  show_id int(11) NOT NULL,
+  creator_id int(11) NOT NULL,
+  PRIMARY KEY (show_id, creator_id),
+  FOREIGN KEY (show_id) REFERENCES caramcc_tv_shows(show_id),
+  FOREIGN KEY (creator_id) REFERENCES caramcc_creators(creator_id)
+);
 ```
 
 ### 1NF
 
- - ~Table has a Primary Key~ Map table
+ - Table has a Primary Key: `show_id, creator_id`
+ - Values of each column are atomic
+ - No repeating groups: no columns
+
+### 2NF
+
+ - No partial dependencies
+ - No calculated data
+
+### 3NF
+
+ - All fields depend on the primary key
+
+
+## Table: `caramcc_show_genres`
+
+### SQL
+
+```
+CREATE TABLE IF NOT EXISTS caramcc_show_genres (
+  show_id int(11) NOT NULL,
+  genre varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (show_id, genre),
+  FOREIGN KEY (show_id) REFERENCES caramcc_tv_shows(show_id)
+);
+```
+
+### 1NF
+
+ - Table has a Primary Key: `show_id, genre`
+ - Values of each column are atomic
+ - No repeating groups: no columns
+
+### 2NF
+
+ - No partial dependencies
+ - No calculated data
+
+### 3NF
+
+ - All fields depend on the primary key
+
+
+## Table: `caramcc_show_airdays`
+
+### SQL
+
+```
+CREATE TABLE IF NOT EXISTS #{$show_airdays} (
+  show_id int(11) NOT NULL,
+  airday varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (show_id, airday),
+  FOREIGN KEY (show_id) REFERENCES caramcc_tv_shows(show_id)
+);
+```
+
+### 1NF
+
+ - Table has a Primary Key: `show_id, airday`
+ - Values of each column are atomic
+ - No repeating groups: no columns
+
+### 2NF
+
+ - No partial dependencies
+ - No calculated data
+
+### 3NF
+
+ - All fields depend on the primary key
+
+
+## Table: `caramcc_show_alt_titles`
+
+### SQL
+
+```
+CREATE TABLE IF NOT EXISTS caramcc_show_alt_titles (
+  show_id int(11) NOT NULL,
+  alt_title varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (show_id, alt_title),
+  FOREIGN KEY (show_id) REFERENCES caramcc_tv_shows(show_id)
+);
+```
+
+### 1NF
+
+ - Table has a Primary Key: `show_id, alt_title`
+ - Values of each column are atomic
+ - No repeating groups: no columns
+
+### 2NF
+
+ - No partial dependencies
+ - No calculated data
+
+### 3NF
+
+ - All fields depend on the primary key
+
+
+## Table: `caramcc_show_languages`
+
+### SQL
+
+```
+CREATE TABLE IF NOT EXISTS caramcc_show_languages} (
+  show_id int(11) NOT NULL,
+  language varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (show_id, language),
+  FOREIGN KEY (show_id) REFERENCES caramcc_tv_shows(show_id)
+);
+```
+
+### 1NF
+
+ - Table has a Primary Key: `show_id, language`
  - Values of each column are atomic
  - No repeating groups: no columns
 
