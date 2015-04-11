@@ -27,11 +27,10 @@ require_relative 'constants.rb'
   content_rating varchar(11) NOT NULL DEFAULT '',
   classification varchar(255) NOT NULL DEFAULT '',
   runtime int(11) NOT NULL DEFAULT '0',
-  network varchar(255) NOT NULL DEFAULT '',
+  network_name varchar(255) NOT NULL DEFAULT '',
   airtime varchar(11) NOT NULL DEFAULT '',
   timezone varchar(63) NOT NULL DEFAULT '',
   plot_summary text(8191) NOT NULL,
-  alternate_titles varchar(2047) NOT NULL DEFAULT '',
   award_nominations int(11) NOT NULL DEFAULT '0',
   award_wins int(11) NOT NULL DEFAULT '0',
   imdb_rating float(8,3) NOT NULL DEFAULT '0',
@@ -41,7 +40,8 @@ require_relative 'constants.rb'
   show_twitter_id varchar(33) NOT NULL DEFAULT '',
   flagged tinyint(1) NOT NULL DEFAULT '0',
   flag varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (show_id)
+  PRIMARY KEY (show_id),
+  FOREIGN KEY (network_name) REFERENCES #{$networks}(network_name)
 );")
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$networks} (
