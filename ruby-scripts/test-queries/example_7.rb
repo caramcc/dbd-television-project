@@ -11,9 +11,10 @@ require_relative '../constants.rb'
 # Example 7
 # I want to determine the average IMDB rating for shows aired on the network HBO.
 
+network = 'HBO'
 
-# result = @client.query("SELECT *, COUNT( FROM #{$tv_shows} GROUP BY network ")
+result = @client.query("SELECT AVG(imdb_rating) FROM #{$tv_shows} WHERE network_name LIKE '#{network}' AND imdb_rating > 0 ")
 
 result.each do |row|
-  puts row['show_title']
+  puts row['AVG(imdb_rating)']
 end

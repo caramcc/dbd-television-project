@@ -7,8 +7,8 @@ require_relative 'constants.rb'
 @client.query("USE #{$db_name}")
 
 networks = []
-@client.query("SELECT network FROM #{$tv_shows};").each do |network|
-  networks.push network['network'] unless network['network'].nil?
+@client.query("SELECT network_name FROM #{$tv_shows};").each do |network|
+  networks.push network['network_name'] unless network['network_name'].nil?
   puts network
 end
 

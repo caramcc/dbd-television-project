@@ -18,6 +18,13 @@ require_relative 'constants.rb'
 @client.query("DROP TABLE #{$creators}")
 @client.query("DROP TABLE #{$networks}")
 
+
+@client.query("CREATE TABLE IF NOT EXISTS #{$networks} (
+  network_name varchar(255) NOT NULL DEFAULT '',
+  network_twitter_id varchar(63),
+  PRIMARY KEY (network_name)
+);")
+
 @client.query("CREATE TABLE IF NOT EXISTS #{$tv_shows} (
   show_id int(11) NOT NULL AUTO_INCREMENT,
   show_title varchar(255) NOT NULL DEFAULT '',
@@ -42,12 +49,6 @@ require_relative 'constants.rb'
   flag varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (show_id),
   FOREIGN KEY (network_name) REFERENCES #{$networks}(network_name)
-);")
-
-@client.query("CREATE TABLE IF NOT EXISTS #{$networks} (
-  network_name varchar(255) NOT NULL DEFAULT '',
-  network_twitter_id varchar(63),
-  PRIMARY KEY (network_name)
 );")
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$actors} (

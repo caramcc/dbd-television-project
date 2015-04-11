@@ -79,23 +79,6 @@ def process_data(data_array)
         flagged = 0
       end
 
-      insert_into_shows = "INSERT INTO #{$tv_shows} (show_title, country, start_date, end_date,
-        content_rating, classification, runtime, airtime, timezone,
-        plot_summary, award_nominations,
-        award_wins, imdb_rating, imdb_votes, imdb_id, tvrage_id, flagged, flag) VALUES (
-        '#{row["title"]}', '#{row["country"]}', '#{start_date}', '#{end_date}',
-        '#{row["content_rating"]}', '#{row["classification"]}', '#{runtime}', '#{airtime}', '#{timezone}',
-        '#{row["plot_summary"]}', '#{award_nominations}', '#{award_wins}',
-        '#{imdb_rating}', '#{imdb_votes}', '#{row["imdb_id"]}', '#{tvrage_id}', '#{flagged}', 
-        '#{row["flag"]}'
-        );"
-      @client.query(insert_into_shows)
-
-      show_id = 0
-      @client.query("SELECT show_id FROM #{$tv_shows} ORDER BY show_id DESC LIMIT 1;").each do |id|
-        show_id = id['show_id']
-      end
-
       network_exists = false
       @client.query("SELECT COUNT(*) FROM #{$networks} WHERE network_name = '#{row['network']}'").each do |result|
         if result['COUNT(*)'] > 0
@@ -105,6 +88,23 @@ def process_data(data_array)
 
       unless network_exists
         @client.query("INSERT INTO #{$networks} (network_name) VALUES ('#{row['network']}')")
+      end
+
+      insert_into_shows = "INSERT INTO #{$tv_shows} (show_title, country, start_date, end_date,
+        content_rating, classification, runtime, network_name, airtime, timezone,
+        plot_summary, award_nominations,
+        award_wins, imdb_rating, imdb_votes, imdb_id, tvrage_id, flagged, flag) VALUES (
+        '#{row["title"]}', '#{row["country"]}', '#{start_date}', '#{end_date}',
+        '#{row["content_rating"]}', '#{row["classification"]}', '#{runtime}', '#{row['network']}', '#{airtime}', '#{timezone}',
+        '#{row["plot_summary"]}', '#{award_nominations}', '#{award_wins}',
+        '#{imdb_rating}', '#{imdb_votes}', '#{row["imdb_id"]}', '#{tvrage_id}', '#{flagged}', 
+        '#{row["flag"]}'
+        );"
+      @client.query(insert_into_shows)
+
+      show_id = 0
+      @client.query("SELECT show_id FROM #{$tv_shows} ORDER BY show_id DESC LIMIT 1;").each do |id|
+        show_id = id['show_id']
       end
 
       if row['genres'].instance_of?(Array)
@@ -162,7 +162,12 @@ def process_data(data_array)
           end
 
           # map
-          @client.query("INSERT INTO #{$show_actors} (show_id, actor_id) VALUES (#{show_id}, #{actor_id});")
+          begin
+            @client.query("INSERT INTO #{$show_actors} (show_id, actor_id) VALUES (#{show_id}, #{actor_id});")
+          rescue Mysql2::Error => e
+            puts e
+          end
+
         end
       end
 
@@ -187,7 +192,11 @@ def process_data(data_array)
           end
 
           # map
-          @client.query("INSERT INTO #{$show_creators} (show_id, creator_id) VALUES (#{show_id}, #{creator_id});")
+          begin
+            @client.query("INSERT INTO #{$show_creators} (show_id, creator_id) VALUES (#{show_id}, #{creator_id});")
+          rescue Mysql2::Error => e
+            puts e
+          end
         end
       end
 

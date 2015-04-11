@@ -13,8 +13,15 @@ require_relative '../constants.rb'
 
 actor = 'Hugh Laurie'
 
-result = @client.query("SELECT a.*, s.start_date, s.show_title FROM #{$tv_shows} s JOIN #{$show_actors} sa ON sa.show_id = s.show_id
-  JOIN #{$actors} a ON a.actor_id = sa.actor_id WHERE actor_name LIKE '#{actor}' ORDER BY s.start_date DESC LIMIT 1;")
+@client.query("CREATE OR REPLACE VIEW caramcc_actors_most_recent_shows
+  AS
+  SELECT a.*, s.start_date, s.show_title FROM #{$tv_shows} s
+  JOIN #{$show_actors} sa ON sa.show_id = s.show_id
+  JOIN #{$actors} a ON a.actor_id = sa.actor_id")
+
+result = @client.query("SELECT show_title FROM caramcc_actors_most_recent_shows
+  WHERE actor_name LIKE '#{actor}'
+  ORDER BY start_date DESC LIMIT 1;")
 
 result.each do |row|
   puts row['show_title']

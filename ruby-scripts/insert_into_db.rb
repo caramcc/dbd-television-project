@@ -32,39 +32,6 @@ end
 
 @client.query("USE #{$db_name}")
 
-# @client.query("DROP TABLE #{@table}")
-
-@client.query("CREATE TABLE IF NOT EXISTS #{$tv_shows} (
-  show_id int(11) NOT NULL AUTO_INCREMENT,
-  show_title varchar(255) NOT NULL DEFAULT '',
-  country varchar(255) NOT NULL DEFAULT '',
-  start_date date NOT NULL DEFAULT '1000-01-01',
-  end_date date,
-  content_rating varchar(11) NOT NULL DEFAULT '',
-  classification varchar(255) NOT NULL DEFAULT '',
-  genres varchar(2047) NOT NULL DEFAULT '',
-  runtime int(11) NOT NULL DEFAULT '0',
-  network varchar(255) NOT NULL DEFAULT '',
-  airtime varchar(11) NOT NULL DEFAULT '',
-  timezone varchar(63) NOT NULL DEFAULT '',
-  airdays varchar(2047) NOT NULL DEFAULT '',
-  languages varchar(2047) NOT NULL DEFAULT '',
-  writers varchar(2047) NOT NULL DEFAULT '',
-  actors varchar(2047) NOT NULL DEFAULT '',
-  plot_summary text(8191) NOT NULL,
-  alternate_titles varchar(2047) NOT NULL DEFAULT '',
-  award_nominations int(11) NOT NULL DEFAULT '0',
-  award_wins int(11) NOT NULL DEFAULT '0',
-  imdb_rating float(8,3) NOT NULL DEFAULT '0',
-  imdb_votes int(11) NOT NULL DEFAULT '0',
-  imdb_id varchar(11) NOT NULL DEFAULT '',
-  tvrage_id int(11) NOT NULL DEFAULT '0',
-  flagged tinyint(1) NOT NULL DEFAULT '0',
-  flag varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (show_id)
-);")
-
-
 
 def process_data(data_array)
   data_array.each do |row|
@@ -114,7 +81,7 @@ def process_data(data_array)
       end
 
       insert_query = "INSERT INTO #{@table} (show_title, country, start_date, end_date, 
-        content_rating, classification, genres, runtime, network, airtime, timezone, 
+        content_rating, classification, genres, runtime, network_name, airtime, timezone,
         airdays, languages, writers, actors, plot_summary, alternate_titles, award_nominations,
         award_wins, imdb_rating, imdb_votes, imdb_id, tvrage_id, flagged, flag) VALUES (
         '#{row["title"]}', '#{row["country"]}', '#{start_date}', '#{end_date}',

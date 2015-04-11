@@ -12,8 +12,10 @@ require_relative '../constants.rb'
 # I want to determine the Network that has aired the most TV Shows in the United States.
 
 
-# result = @client.query("SELECT *, COUNT( FROM #{$tv_shows} GROUP BY network ")
+result = @client.query("SELECT MAX(network_name) FROM #{$tv_shows}
+WHERE country LIKE 'US' OR country LIKE 'USA' OR country LIKE 'United States%'
+LIMIT 1")
 
 result.each do |row|
-  puts row['show_title']
+  puts row['MAX(network_name)']
 end

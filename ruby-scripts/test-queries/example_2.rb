@@ -13,13 +13,18 @@ require_relative '../constants.rb'
 
 creator = 'J.J. Abrams'
 
-result = @client.query(
-    "SELECT c.*, s.imdb_rating, s.show_title
+@client.query("CREATE OR REPLACE VIEW caramcc_creator_show_ratings
+AS
+SELECT c.creator_name, s.imdb_rating, s.show_title
 FROM #{$tv_shows} s
 JOIN #{$show_creators} sc ON sc.show_id = s.show_id
-JOIN #{$creators} c ON c.creator_id = sc.creator_id
+JOIN #{$creators} c ON c.creator_id = sc.creator_id")
+
+result = @client.query(
+    "SELECT imdb_rating, show_title
+FROM caramcc_creator_show_ratings
 WHERE creator_name LIKE '%#{creator}%'
-ORDER BY s.imdb_rating ASC LIMIT 1")
+ORDER BY imdb_rating ASC LIMIT 1")
 
 result.each do |row|
   puts row['show_title']

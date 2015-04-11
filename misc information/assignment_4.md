@@ -319,3 +319,7 @@ CREATE TABLE IF NOT EXISTS caramcc_show_languages} (
 ### 3NF
 
  - All fields depend on the primary key
+
+
+# Views
+
