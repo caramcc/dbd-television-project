@@ -67,6 +67,7 @@ require_relative 'constants.rb'
 @client.query("CREATE TABLE IF NOT EXISTS #{$show_actors} (
   show_id int(11) NOT NULL,
   actor_id int(11) NOT NULL,
+  PRIMARY KEY (show_id, actor_id),
   FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id),
   FOREIGN KEY (actor_id) REFERENCES #{$actors}(actor_id)
 );")
@@ -75,6 +76,7 @@ require_relative 'constants.rb'
 @client.query("CREATE TABLE IF NOT EXISTS #{$show_creators} (
   show_id int(11) NOT NULL,
   creator_id int(11) NOT NULL,
+  PRIMARY KEY (show_id, creator_id),
   FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id),
   FOREIGN KEY (creator_id) REFERENCES #{$creators}(creator_id)
 );")
@@ -82,23 +84,27 @@ require_relative 'constants.rb'
 @client.query("CREATE TABLE IF NOT EXISTS #{$show_genres} (
   show_id int(11) NOT NULL,
   genre varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (show_id, genre),
   FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id)
 );")
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$show_airdays} (
   show_id int(11) NOT NULL,
   airday varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (show_id, airday),
   FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id)
 );")
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$show_alt_titles} (
   show_id int(11) NOT NULL,
   alt_title varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (show_id, alt_title),
   FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id)
 );")
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$show_languages} (
   show_id int(11) NOT NULL,
   language varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (show_id, language),
   FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id)
 );")
