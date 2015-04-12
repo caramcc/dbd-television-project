@@ -23,7 +23,7 @@ JOIN #{$creators} c ON c.creator_id = sc.creator_id")
 result = @client.query(
     "SELECT imdb_rating, show_title
 FROM caramcc_creator_show_ratings
-WHERE creator_name LIKE '%#{creator}%'
+WHERE creator_name LIKE '#{creator}'
 ORDER BY imdb_rating ASC LIMIT 1")
 
 result.each do |row|

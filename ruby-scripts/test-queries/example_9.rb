@@ -13,9 +13,14 @@ require_relative '../constants.rb'
 
 creator = 'J.J. Abrams'
 
-result = @client.query("SELECT COUNT(*)
+@client.query("CREATE OR REPLACE VIEW caramcc_creator_show_count
+AS
+SELECT c.creator_name
 FROM #{$show_creators} sc
-JOIN #{$creators} c ON c.creator_id = sc.creator_id
+JOIN #{$creators} c ON c.creator_id = sc.creator_id")
+
+result = @client.query("SELECT COUNT(*)
+FROM caramcc_creator_show_count
 WHERE creator_name LIKE '#{creator}' ")
 
 result.each do |row|

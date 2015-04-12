@@ -22,7 +22,7 @@ JOIN #{$creators} c ON c.creator_id = sc.creator_id")
 
 result = @client.query("SELECT show_title
 FROM caramcc_creator_show_seasons
-WHERE creator_name LIKE '%#{creator}%'
+WHERE creator_name LIKE '#{creator}'
 ORDER BY DATEDIFF(start_date, end_date ) ASC LIMIT 1;")
 
 result.each do |row|
