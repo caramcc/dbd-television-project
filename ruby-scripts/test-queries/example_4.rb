@@ -13,9 +13,15 @@ require_relative '../constants.rb'
 
 tv_show = 'Breaking Bad'
 
-result = @client.query("SELECT sl.*, s.show_id
-FROM #{$tv_shows} s
-JOIN #{$show_languages} sl ON sl.show_id = s.show_id
+
+@client.query("CREATE OR REPLACE VIEW caramcc_all_show_languages
+  AS
+  SELECT sl.*, s.show_title
+  FROM #{$tv_shows} s
+  JOIN #{$show_languages} sl ON sl.show_id = s.show_id")
+
+result = @client.query("SELECT language
+FROM caramcc_all_show_languages
 WHERE show_title LIKE '#{tv_show}';")
 
 result.each do |row|
