@@ -1,6 +1,7 @@
 # Assignment 4
 - Cara McCormack `@carammcc`
-
+- [Github Repo for project](https://github.com/caramcc/dbd-television-project)
+- [Latest Commit Hash](https://github.com/caramcc/dbd-television-project/commit/5bf359a87ab65e433c9862b07dad5a1e87cd25fe)
 
 # Normal Form Checks for Tables
 
