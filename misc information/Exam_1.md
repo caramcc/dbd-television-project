@@ -123,12 +123,42 @@ _"What are the top trends in your domain on Twitter?"_
 
 thoughts: count other tags in tweets tagged TV shows, known twitter handles
 
+I created a View representing  to handle this case:
+
+```
+"CREATE OR REPLACE VIEW `caramcc_Exam1_tv_tweets`
+AS
+SELECT ttmap.tag_id, tweets.*
+FROM Exam1_Twitter_Tweets tweets
+JOIN Exam1_Twitter_Tweets_Tag_Map ttmap ON tweets.tweet_id = ttmap.tweet_id
+JOIN Exam1_Twitter_Tag_Category_Map tcmap ON ttmap.tag_id = tcmap.tag_id
+JOIN Exam1_Twitter_Tag_Category tc ON tcmap.category_id = tc.category_id
+  AND (tc.category LIKE '%television%" OR tc.category LIKE '%tv%')"
+```
+
+Then created a query to determine what tags within the TV Show domain have been updated in the last month, and order them by the ones that appear most often.
+
+
+```
+"SELECT tag
+FROM Exam1_Twitter_Tags tags
+JOIN caramcc_Exam1_tv_tweets tweets ON tweets.tag_id = tags.tag_id
+WHERE last_update >= DATE_SUB(CURDATE(), INTERVAL 1 month)
+ORDER BY COUNT(*) DESC LIMIT 20"
+```
+
+
 
 ## Question 2
 
 _"Who should I be following?"_
 
 twitter users who have tweeted the most similar shows to you (limit 10?)
+
+```
+"SELECT screen_name FROM Exam1_Twitter_Users
+WHERE
+```
 
 ## Question 3 (IV)
 
@@ -172,6 +202,17 @@ ORDER BY avg_rating DESC LIMIT 20"
 ## Question 6 (VII)
 _"What thing should I buy? (What TV Show should I watch?)"_
 what other things do most people who watch the shows I watch also watch?
+
+```
+"CREATE OR REPLACE VIEW `caramcc_Exam1_tv_tweets`
+AS
+SELECT ttmap.tag_id, tweets.*
+FROM Exam1_Twitter_Tweets tweets
+JOIN Exam1_Twitter_Tweets_Tag_Map ttmap ON tweets.tweet_id = ttmap.tweet_id
+JOIN Exam1_Twitter_Tag_Category_Map tcmap ON ttmap.tag_id = tcmap.tag_id
+JOIN Exam1_Twitter_Tag_Category tc ON tcmap.category_id = tc.category_id
+  AND (tc.category LIKE '%television%" OR tc.category LIKE '%tv%')"
+```
 
 ## Question 7 (VIII)
 _"I am hiring in my team. Does Twitter have anyone who would be interested?"_
