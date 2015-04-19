@@ -116,6 +116,117 @@ CREATE TABLE IF NOT EXISTS caramcc_show_languages (
 );
 ```
 
+### I used the provided Exam1 Twitter Schema
+
+```
+CREATE TABLE IF NOT EXISTS Exam1_Twitter_Tags (
+  tag_id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  tag varchar(255) NOT NULL DEFAULT '',
+  last_update datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  created_at datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (tag_id,tag)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
+```
+
+```
+CREATE TABLE IF NOT EXISTS Exam1_Twitter_Tag_Category (
+  category_id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  category varchar(255) DEFAULT NULL,
+  last_update datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (category_id)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
+```
+```
+CREATE TABLE IF NOT EXISTS Exam1_Twitter_Tag_Category_Map (
+  category_id bigint(20) unsigned NOT NULL DEFAULT '0',
+  tag_id bigint(20) unsigned NOT NULL DEFAULT '0',
+  last_update datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (category_id,tag_id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+```
+```
+CREATE TABLE IF NOT EXISTS Exam1_Twitter_Tweets (
+  tweet_id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  from_user_id bigint(20) unsigned NOT NULL DEFAULT '0',
+  tweet varchar(255) DEFAULT NULL,
+  geo varchar(255) NOT NULL,
+  created_at datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (tweet_id),
+  KEY tweet (tweet)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=29 ;
+```
+```
+CREATE TABLE IF NOT EXISTS Exam1_Twitter_Tweets_Tag_Map (
+  tweet_id bigint(20) unsigned NOT NULL DEFAULT '0',
+  tag_id bigint(20) unsigned NOT NULL DEFAULT '0',
+  last_update datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (tweet_id,tag_id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+```
+```
+CREATE TABLE IF NOT EXISTS Exam1_Twitter_Tweets_Url_Map (
+  tweet_id bigint(20) unsigned NOT NULL DEFAULT '0',
+  url_id bigint(20) unsigned NOT NULL DEFAULT '0',
+  last_update datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (tweet_id,url_id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+```
+```
+CREATE TABLE IF NOT EXISTS Exam1_Twitter_Urls (
+  url_id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  url varchar(555) NOT NULL DEFAULT '',
+  verified tinyint(4) NOT NULL DEFAULT '0',
+  last_update datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (url_id),
+  KEY tag (url(333))
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=29 ;
+```
+```
+CREATE TABLE IF NOT EXISTS Exam1_Twitter_Users (
+  user_id bigint(20) unsigned NOT NULL DEFAULT '0',
+  name varchar(255) NOT NULL DEFAULT '''''',
+  screen_name varchar(255) NOT NULL DEFAULT '''''',
+  location varchar(255) NOT NULL DEFAULT '''''',
+  latitude double NOT NULL,
+  longitude double NOT NULL,
+  created_at datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  last_update datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  followers_count int(11) NOT NULL DEFAULT '0',
+  verified tinyint(4) NOT NULL DEFAULT '0',
+  geo_enabled tinyint(4) NOT NULL DEFAULT '0',
+  description text NOT NULL,
+  time_zone varchar(255) NOT NULL DEFAULT '',
+  friends_count int(11) unsigned NOT NULL DEFAULT '0',
+  statuses_count int(11) unsigned NOT NULL DEFAULT '0',
+  tweet_freq float NOT NULL DEFAULT '0',
+  bot_count int(11) unsigned NOT NULL DEFAULT '0',
+  protected tinyint(4) NOT NULL DEFAULT '0',
+  utc_offset int(11) NOT NULL DEFAULT '0',
+  notifications varchar(255) NOT NULL DEFAULT '''''',
+  lang char(2) NOT NULL DEFAULT '''''',
+  following varchar(255) NOT NULL DEFAULT '''''',
+  favourites_count int(10) unsigned NOT NULL DEFAULT '0',
+  url varchar(255) NOT NULL DEFAULT '''''',
+  contributors_enabled tinyint(4) NOT NULL DEFAULT '0',
+  is_translator tinyint(4) NOT NULL DEFAULT '0',
+  listed_count int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (user_id),
+  KEY screen_name (screen_name)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+```
+
+### I also added a few tables to the twitter schema:
+
+```
+CREATE TABLE IF NOT EXISTS caramcc_user_shows_followed (
+  user_id bigint(20) unsigned NOT NULL DEFAULT '0',
+  show_id int(11) NOT NULL,
+  PRIMARY KEY (user_id, show_id),
+  FOREIGN KEY (user_id) REFERENCES Exam1_Twitter_Users (user_id),
+  FOREIGN KEY (show_id) REFERENCES caramcc_tv_shows (show_id),
+);
+```
+
 
 ## Question 1
 
@@ -153,7 +264,7 @@ ORDER BY COUNT(*) DESC LIMIT 20"
 
 _"Who should I be following?"_
 
-twitter users who have tweeted the most similar shows to you (limit 10?)
+twitter users who have tweeted the most similar shows to you
 
 ```
 "SELECT screen_name FROM Exam1_Twitter_Users
@@ -203,15 +314,40 @@ ORDER BY avg_rating DESC LIMIT 20"
 _"What thing should I buy? (What TV Show should I watch?)"_
 what other things do most people who watch the shows I watch also watch?
 
+what highly-rated shows have at least one of the same genres of the shows that I have tweeted about?
+
+### Views
+
 ```
-"CREATE OR REPLACE VIEW `caramcc_Exam1_tv_tweets`
-AS
-SELECT ttmap.tag_id, tweets.*
-FROM Exam1_Twitter_Tweets tweets
-JOIN Exam1_Twitter_Tweets_Tag_Map ttmap ON tweets.tweet_id = ttmap.tweet_id
-JOIN Exam1_Twitter_Tag_Category_Map tcmap ON ttmap.tag_id = tcmap.tag_id
-JOIN Exam1_Twitter_Tag_Category tc ON tcmap.category_id = tc.category_id
-  AND (tc.category LIKE '%television%" OR tc.category LIKE '%tv%')"
+"CREATE OR REPLACE VIEW caramcc_all_show_genres
+  AS
+  SELECT sg.*, s.*
+  FROM caramcc_tv_shows s
+  JOIN caramcc_show_genres sg ON sg.show_id = s.show_id"
+```
+
+```
+"CREATE OR REPLACE VIEW caramcc_all_user_genres
+  AS
+  SELECT sg.genre, u.user_id
+  FROM caramcc_user_shows u
+  JOIN caramcc_tv_shows s ON u.show_id = s.show_id
+  JOIN caramcc_show_genres sg ON s.show_id = sg.show_id"
+```
+
+(Assume we are given a user_id, #{user_id} to search for)
+
+### Query
+
+```
+"SELECT show_title FROM caramcc_tv_shows
+WHERE imdb_rating >= 9.0 AND imdb_votes > 2000
+AND EXISTS (
+  SELECT genre FROM caramcc_all_show_genres
+  WHERE genre LIKE (
+    SELECT MAX(genre) FROM caramcc_all_user_genres
+    WHERE user_id = #{user_id}
+    ORDER BY COUNT(*) LIMIT 1 )
 ```
 
 ## Question 7 (VIII)
@@ -221,11 +357,24 @@ select actor twitter handles where actor tweets contain the words 'job', 'gig', 
 ### View
 
 ```
-CREATE OR REPLACE VIEW caramcc_actors_most_recent_shows
+"CREATE OR REPLACE VIEW caramcc_actor_tweets
   AS
-  SELECT a.*, s.start_date, s.show_title FROM caramcc_tv_shows s
-  JOIN caramcc_show_actors sa ON sa.show_id = s.show_id
-  JOIN caramcc_actors a ON a.actor_id = sa.actor_id
+  SELECT a.actor_name
+  FROM caramcc_actors a
+  JOIN Exam1_Twitter_Users u ON a.actor_twitter_id LIKE u.screen_name
+  JOIN Exam1_Twitter_Tweets t ON u.user_id = t.from_user_id"
+```
+
+### Query
+
+```
+"SELECT actor_name
+FROM caramcc_actor_tweets
+WHERE tweet LIKE '%job%'
+OR tweet LIKE '%gig%'
+OR tweet LIKE '%casting%'
+OR tweet LIKE '%hire%'
+OR tweet LIKE '%employment%'"
 ```
 
 ### Query
@@ -275,12 +424,11 @@ _"I want to determine which genres a given Actor appears in most frequently."_
 ### View
 
 ```
-"CREATE OR REPLACE VIEW caramcc_actor_genre_frequency
+"CREATE OR REPLACE VIEW caramcc_user_genre_frequency
   AS
   SELECT sg.genre, a.actor_name
-  FROM caramcc_actors a
-  JOIN caramcc_show_actors sa ON a.actor_id = sa.actor_id
-  JOIN caramcc_tv_shows s ON sa.show_id = s.show_id
+  FROM caramcc_user_shows u
+  JOIN caramcc_tv_shows s ON u.show_id = s.show_id
   JOIN caramcc_show_genres sg ON s.show_id = sg.show_id"
 ```
 
