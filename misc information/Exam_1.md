@@ -215,7 +215,7 @@ CREATE TABLE IF NOT EXISTS Exam1_Twitter_Users (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ```
 
-### I also added a few tables to the twitter schema:
+### I also added a table to the twitter schema:
 
 ```
 CREATE TABLE IF NOT EXISTS caramcc_user_shows_followed (
@@ -352,7 +352,9 @@ AND EXISTS (
 
 ## Question 7 (VIII)
 _"I am hiring in my team. Does Twitter have anyone who would be interested?"_
-select actor twitter handles where actor tweets contain the words 'job', 'gig', 'casting', 'hire'
+
+In order to determine what actors on twitter might be looking for a job, I search through all known actor twitter handles for tweets they've written containing the words:
+'job', 'gig', 'casting', 'hire', 'employ', and 'opportunit' (for opportunity/ies)
 
 ### View
 
@@ -374,218 +376,8 @@ WHERE tweet LIKE '%job%'
 OR tweet LIKE '%gig%'
 OR tweet LIKE '%casting%'
 OR tweet LIKE '%hire%'
-OR tweet LIKE '%employment%'"
+OR tweet LIKE '%employ%'
+OR tweet LIKE '%opportunit%'
+"
 ```
 
-### Query
-
-```
-SELECT show_title FROM caramcc_actors_most_recent_shows
-  WHERE actor_name LIKE 'Hugh Laurie'
-  ORDER BY start_date DESC LIMIT 1;
-```
-
-### Result:
-
-_House_
-
-## Use Case 2
-
-_"I want to determine which is the lowest-rated TV Show made by a given Creator."_
-
-### View
-
-```
-"CREATE OR REPLACE VIEW caramcc_creator_show_ratings
-AS
-SELECT c.creator_name, s.imdb_rating, s.show_title
-FROM caramcc_tv_shows s
-JOIN caramcc_show_creators sc ON sc.show_id = s.show_id
-JOIN caramcc_creators c ON c.creator_id = sc.creator_id"
-```
-
-### Query
-
-```
-"SELECT imdb_rating, show_title
-FROM caramcc_creator_show_ratings
-WHERE creator_name LIKE 'J.J. Abrams'
-ORDER BY imdb_rating ASC LIMIT 1"
-```
-
-### Result:
-
-_Undercovers_
-
-## Use Case 3
-
-_"I want to determine which genres a given Actor appears in most frequently."_
-
-### View
-
-```
-"CREATE OR REPLACE VIEW caramcc_user_genre_frequency
-  AS
-  SELECT sg.genre, a.actor_name
-  FROM caramcc_user_shows u
-  JOIN caramcc_tv_shows s ON u.show_id = s.show_id
-  JOIN caramcc_show_genres sg ON s.show_id = sg.show_id"
-```
-
-### Query
-
-```
-"SELECT MAX(genre)
-FROM caramcc_actor_genre_frequency
-WHERE actor_name LIKE 'Hugh Laurie'"
-```
-
-### Result:
-
-_Sketch/Improv_
-
-## Use Case 4
-
-_"I want to determine which languages a given TV Show was broadcast in."_
-
-### View
-
-```
-"CREATE OR REPLACE VIEW caramcc_all_show_languages
-  AS
-  SELECT sl.*, s.show_title
-  FROM caramcc_tv_shows s
-  JOIN caramcc_show_languages sl ON sl.show_id = s.show_id"
-```
-
-### Query
-
-```
-"SELECT language
-FROM caramcc_all_show_languages
-WHERE show_title LIKE 'Breaking Bad';"
-```
-
-### Result:
-
-_English
- German
- Persian
- Romanian
- Spanish_
-
-## Use Case 5
-
-_"I want to determine which TV Show made by a given Creator had the most seasons."_
-
-### View
-
-```
-"CREATE OR REPLACE VIEW caramcc_creator_show_seasons
-AS
-SELECT c.*, s.start_date, s.end_date, s.show_title
-FROM caramcc_tv_shows s
-JOIN caramcc_show_creators sc ON sc.show_id = s.show_id
-JOIN caramcc_creators c ON c.creator_id = sc.creator_id"
-```
-
-### Query
-
-```
-"SELECT show_title
-FROM caramcc_creator_show_seasons
-WHERE creator_name LIKE 'J.J. Abrams'
-ORDER BY DATEDIFF(start_date, end_date ) ASC LIMIT 1;"
-```
-
-### Result:
-
-_Lost_
-
-## Use Case 6
-
-_"I want to determine the Network that has aired the most TV Shows in the United States."_
-
-### Query
-
-```
-"SELECT MAX(network_name) FROM caramcc_tv_shows
-WHERE country LIKE 'US' OR country LIKE 'USA' OR country LIKE 'United States%'
-LIMIT 1"
-```
-
-### Result:
-
-_Z LIVING_
-
-## Use Case 7
-
-_"I want to determine the average IMDB rating for shows aired on the network HBO."_
-
-### Query
-
-```
-"SELECT AVG(imdb_rating) FROM caramcc_tv_shows
-WHERE network_name LIKE 'HBO' AND imdb_rating > 0 "
-```
-
-### Result:
-
-_7.6255556_
-
-## Use Case 8
-
-_"I want to determine the titles of all the shows broadcast on NBC."_
-
-### Query
-
-```
-"SELECT show_title FROM caramcc_tv_shows WHERE network_name LIKE 'NBC'
-```
-
-### Result:
-
-_(long list, results omitted)_
-
-## Use Case 9
-
-_"I want to determine how many TV Shows a given Creator has made."_
-
-### View
-
-```
-"CREATE OR REPLACE VIEW caramcc_creator_show_count
-AS
-SELECT c.creator_name
-FROM caramcc_show_creators sc
-JOIN caramcc_creators c ON c.creator_id = sc.creator_id"
-```
-
-### Query
-
-```
-"SELECT COUNT(*)
-FROM caramcc_creator_show_count
-WHERE creator_name LIKE 'J.J. Abrams' "
-```
-
-### Result:
-
-_5_
-
-## Use Case 10
-
-_"I want to determine which TV Show broadcast in the UK has received the most IMDB votes."_
-
-
-### Query
-
-```
-"SELECT show_title FROM caramcc_tv_shows
-WHERE country LIKE 'UK'
-ORDER BY imdb_votes DESC LIMIT 1"
-```
-
-### Result:
-
-_Sherlock_
