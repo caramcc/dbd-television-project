@@ -264,11 +264,34 @@ ORDER BY COUNT(*) DESC LIMIT 20"
 
 _"Who should I be following?"_
 
-twitter users who have tweeted the most similar shows to you
+I should be following the people who tweet the most about the thing that I have tweeted the most about.
+
+### View
 
 ```
-"SELECT screen_name FROM Exam1_Twitter_Users
-WHERE
+"CREATE OR REPLACE VIEW caramcc_Exam1_user_tweet_tags
+AS
+SELECT ttmap.tag_id, users.*
+FROM Exam1_Twitter_Users users
+JOIN Exam1_Twitter_Tweets tweets ON users.user_id = tweets.from_user_id
+JOIN Exam1_Twitter_Tweets_Tag_Map ttmap ON tweets.tweet_id = ttmap.tweet_id"
+```
+
+### Query
+
+given my user_id = #{user_id}
+
+I should be following the people who tweet the most about the thing that I have tweeted the most about.
+
+
+```
+"SELECT screen_name
+FROM caramcc_Exam1_user_tweet_tags
+WHERE tag_id LIKE ( SELECT MAX(tag_id)
+                    FROM caramcc_Exam1_user_tweet_tags
+                    WHERE user_id = #{user_id} LIMIT 1 )
+AND user_id NOT LIKE #{user_id}
+ORDER BY COUNT(*) DESC LIMIT 20
 ```
 
 ## Question 3 (IV)
@@ -286,9 +309,22 @@ ORDER BY imdb_votes DESC LIMIT 20;"
 ## Question 4 (V)
 
 _"What are the most similar things? (What are the most similar shows?)"_
-twitter users who follow one show also following another show
-shows by genre
 
+To answer this question, I have defined similarity as having similar genres.
+However, finding two shows that are the most similar based on their genres without caching the data in some intermediary table is an operation with more than O(2^n) complexity.
+As there are close to 50,000 rows in my table and I need to turn in this exam _prior_ to the heat death of the universe, I'm going to assume the name of one show, for which I would like to find the shows most similar to it.
+
+Given: show_title = #{show_title}
+
+```
+"SELECT DISTINCT show_title
+FROM caramcc_popular_shows_genres
+WHERE genre LIKE
+  (SELECT genre FROM caramcc_popular_shows_genres
+  WHERE show_title LIKE '%#{show_title}%' LIMIT 1)
+AND show_title NOT LIKE '%#{show_title}%'
+ORDER BY imdb_rating DESC LIMIT #{lim}"
+```
 
 ## Question 5 (VI)
 
@@ -312,9 +348,8 @@ ORDER BY avg_rating DESC LIMIT 20"
 
 ## Question 6 (VII)
 _"What thing should I buy? (What TV Show should I watch?)"_
-what other things do most people who watch the shows I watch also watch?
 
-what highly-rated shows have at least one of the same genres of the shows that I have tweeted about?
+In order to decide what TV Show I should watch, I want to see what shows in my favorite genre (based on shows I've tweeted about) are highly rated and not obscure.
 
 ### Views
 

@@ -13,35 +13,61 @@ lim = 20
 
 @client.query("CREATE OR REPLACE VIEW caramcc_popular_shows_genres
   AS
-  SELECT sg.*, s.show_title, s.show_id
+  SELECT sg.*, s.show_title, s.imdb_rating, s.network_name
   FROM #{$tv_shows} s
   JOIN #{$show_genres} sg ON sg.show_id = s.show_id AND s.imdb_votes > 2000 AND s.imdb_rating > 5")
 
 # result = @client.query("SELECT network_name FROM #{$tv_shows} ORDER BY imdb_votes DESC LIMIT 20;")
 
-# result = @client.query("SELECT network_name, avg_rating
-# FROM (
-# SELECT network_name, AVG(imdb_rating) as avg_rating, AVG(imdb_votes) as avg_votes FROM #{$tv_shows}
-# WHERE imdb_rating > 0.0 AND network_name NOT LIKE ''
-# GROUP BY network_name
-# HAVING COUNT(*) > 20 AND avg_votes > 2000) t
-# ORDER BY avg_rating DESC LIMIT 20")
+result = @client.query("SELECT DISTINCT show_title
+FROM caramcc_popular_shows_genres
+WHERE genre REGEXP
+  (SELECT GROUP_CONCAT(DISTINCT genre ORDER BY genre ASC SEPARATOR '|') FROM caramcc_popular_shows_genres
+  WHERE show_title LIKE '%Legend of Korra%')
+AND show_title NOT LIKE '%Legend of Korra%'
+ORDER BY imdb_rating DESC LIMIT #{lim}")
 
-# SELECT DISTINCT records.id
-# FROM records
-# INNER JOIN data d1 on d1.id = records.firstname AND data.value = "john"
-# INNER JOIN data d2 on d2.id = records.lastname AND data.value = "smith"
+# result = @client.query("SELECT show_title FROM (SELECT show_title, imdb_rating
+# FROM caramcc_popular_shows_genres
+# WHERE genre REGEXP
+#   (SELECT GROUP_CONCAT(DISTINCT genre ORDER BY genre ASC SEPARATOR '|') FROM caramcc_popular_shows_genres
+#   WHERE show_title LIKE '%Legend of Korra%')
+# AND show_title NOT LIKE '%Legend of Korra%'
+# AND network_name LIKE '%nick%'
+# AND imdb_rating ORDER BY COUNT(show_title) DESC LIMIT #{lim}) AS t
+# ")
 
-# s1.show_title FROM caramcc_popular_shows_genres s1
+# "SELECT first_user.id_user, second_user.id_user, COUNT(first_user.id_user) AS total_matches
+#
+# FROM likes AS first_user
+#
+# JOIN likes AS second_user
+# ON second_user.id_artist = first_user.id_artist
+# AND second_user.id_user != first_user.id_user
+#
+# GROUP BY first_user.id_user, second_user.id_user
+#
+# ORDER BY total_matches DESC
+#
+# LIMIT 1"
+
+# result = @client.query("SELECT genre FROM caramcc_popular_shows_genres
+#   WHERE show_title LIKE '%Legend of Korra%' LIMIT 1")
+
+#
+# "SELECT screen_name
+# FROM caramcc_Exam1_user_tweet_tags
+# WHERE tag_id LIKE ( SELECT MAX(tag_id)
+#                     FROM caramcc_Exam1_user_tweet_tags
+#                     WHERE user_id = #{user_id} LIMIT 1 )
+# AND user_id NOT LIKE #{user_id}
+# ORDER BY COUNT(*) DESC LIMIT 20
+# "
+#
+# result = @client.query("SELECT s1.show_title FROM caramcc_popular_shows_genres s1
 # INTERSECT
 # SELECT s2.show_title FROM caramcc_popular_shows_genres s2 WHERE s2 NOT LIKE 's1'
-
-
-result = @client.query("SELECT DISTINCT s1.show_title, s2.show_title
-FROM caramcc_popular_shows_genres g
-INNER JOIN #{$tv_shows} s1 ON s1.show_id = g.show_id
-INNER JOIN #{$tv_shows} s2 ON s2.show_id = g.show_id
-LIMIT #{lim};")
+# LIMIT #{lim};")
 
 
 
@@ -63,16 +89,24 @@ LIMIT #{lim};")
 
 
 
-# result.each do |row|
-#   puts "#{row['show_title']}"
-# end
-
 result.each do |row|
   puts "#{row['show_title']}"
-  # puts "#{row['s1.show_title']}"
-  # puts "#{row['s2.show_title']}"
 end
 
 # result.each do |row|
+#   puts "#{row['COUNT(show_title)']}"
+# end
+
+# result.each do |row|
+#   puts "#{row['show_title']}"
+#   # puts "#{row['s1.show_title']}"
+#   # puts "#{row['s2.show_title']}"
+# end
+#
+# result.each do |row|
 #   puts "#{row['network_name']} - #{row['avg_rating']}"
+# end
+
+# result.each do |row|
+#   puts "#{row['genre']} "
 # end
