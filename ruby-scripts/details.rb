@@ -2,7 +2,7 @@ require 'net/http'
 require 'json'
 require 'mysql2'
 
-require_relative '../constants.rb'
+require_relative 'constants.rb'
 
 @client = Mysql2::Client.new(:host => $host, :username => $username, :password => $password)
 
