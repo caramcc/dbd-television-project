@@ -198,7 +198,7 @@ def update_record(row)
         plot_summary = '#{row["plot_summary"]}', award_nominations = '#{award_nominations}', award_wins = '#{award_wins}',
         imdb_rating ='#{imdb_rating}', imdb_votes = '#{imdb_votes}', imdb_id = '#{row["imdb_id"]}', tvrage_id = '#{tvrage_id}', flagged = '#{flagged}',
         flag = '#{row["flag"]}'
-        WHERE show_id = #{@show_id});"
+        WHERE show_id = #{@show_id};"
 
     @client.query(insert_into_shows)
 

@@ -58,8 +58,7 @@ ALTER TABLE #{$show_languages}
   ADD CONSTRAINT caramcc_show_languages_ibfk_1_cascade
   FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id) ON DELETE CASCADE;"
 ]
-]
-#
+
 alter.each do |q|
   @client.query(q)
 end
