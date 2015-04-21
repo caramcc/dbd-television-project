@@ -1,7 +1,7 @@
 # Exam 1
 - Cara McCormack `@carammcc` (working alone)
 - [Github Repo for project](https://github.com/caramcc/dbd-television-project)
-- [Latest Commit Hash](https://github.com/caramcc/dbd-television-project/commit/5bf359a87ab65e433c9862b07dad5a1e87cd25fe)
+- [Latest Commit Hash](https://github.com/caramcc/dbd-television-project/commit/2093a2e990573f80959994cebc9a31c7bfec242c)
 
 # SQL for Database Schema
 
@@ -232,9 +232,9 @@ CREATE TABLE IF NOT EXISTS caramcc_user_shows_followed (
 
 _"What are the top trends in your domain on Twitter?"_
 
-thoughts: count other tags in tweets tagged TV shows, known twitter handles
+The top trends are determined by which tags within the TV Show domain have been updated in the last month, ordered which of these appear most often.
 
-I created a View representing  to handle this case:
+### View
 
 ```
 "CREATE OR REPLACE VIEW `caramcc_Exam1_tv_tweets`
@@ -247,8 +247,7 @@ JOIN Exam1_Twitter_Tag_Category tc ON tcmap.category_id = tc.category_id
   AND (tc.category LIKE '%television%" OR tc.category LIKE '%tv%')"
 ```
 
-Then created a query to determine what tags within the TV Show domain have been updated in the last month, and order them by the ones that appear most often.
-
+### Query
 
 ```
 "SELECT tag

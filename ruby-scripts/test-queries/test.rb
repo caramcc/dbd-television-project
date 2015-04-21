@@ -17,15 +17,19 @@ lim = 20
   FROM #{$tv_shows} s
   JOIN #{$show_genres} sg ON sg.show_id = s.show_id AND s.imdb_votes > 2000 AND s.imdb_rating > 5")
 
-# result = @client.query("SELECT network_name FROM #{$tv_shows} ORDER BY imdb_votes DESC LIMIT 20;")
+result = @client.query("SELECT DATEDIFF(end_date, start_date) as days_ran FROM #{$tv_shows} WHERE show_title LIKE '%clone%'")
 
-result = @client.query("SELECT DISTINCT show_title
-FROM caramcc_popular_shows_genres
-WHERE genre REGEXP
-  (SELECT GROUP_CONCAT(DISTINCT genre ORDER BY genre ASC SEPARATOR '|') FROM caramcc_popular_shows_genres
-  WHERE show_title LIKE '%Legend of Korra%')
-AND show_title NOT LIKE '%Legend of Korra%'
-ORDER BY imdb_rating DESC LIMIT #{lim}")
+# result = @client.query("SELECT s1.show_title AS s1t, s2.show_title AS s2t, COUNT(i1.genre) AS genres_in_common
+# FROM #{$tv_shows} s1
+# JOIN #{$tv_shows} s2 ON s2.show_id < s1.show_id AND s1.imdb_rating > 8.6 AND s2.imdb_rating > 8.6
+# JOIN #{$show_genres} i1 ON i1.show_id = s1.show_id
+# WHERE EXISTS (SELECT 1
+#               FROM #{$tv_shows} s
+#               JOIN #{$show_genres} i on i.show_id = s.show_id
+#              WHERE i.genre = i1.genre
+#                AND s.show_id = s2.show_id)
+# GROUP BY s1.show_title, s2.show_title
+# ORDER BY genres_in_common DESC, s1.show_title, s2.show_title")
 
 # result = @client.query("SELECT show_title FROM (SELECT show_title, imdb_rating
 # FROM caramcc_popular_shows_genres
@@ -89,13 +93,13 @@ ORDER BY imdb_rating DESC LIMIT #{lim}")
 
 
 
-result.each do |row|
-  puts "#{row['show_title']}"
-end
-
 # result.each do |row|
-#   puts "#{row['COUNT(show_title)']}"
+#   puts "#{row['s1t']} and #{row['s2t']} [#{row['genres_in_common']} genres in common]"
 # end
+
+result.each do |row|
+  puts "#{row['seasons']}"
+end
 
 # result.each do |row|
 #   puts "#{row['show_title']}"
