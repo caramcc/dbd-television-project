@@ -111,9 +111,11 @@ end
 output = []
 
 results.each do |show, show_hash|
+  show_hash['network_name'] == s1['network_name'] ? nn = 20 : nn = 0
+  show_hash['classification'] == s1['classification'] ? classification = 50 : classification = 0
 	show_hash['days_ran'] <= 0 ? awards = 0 : awards = (365 * (show_hash['award_nominations'] + (2 * show_hash['award_wins']))) / show_hash['days_ran']
 
-	likability_index =  15 * show_hash['total_in_common'] + (10 * show_hash['imdb_rating']) + awards
+	likability_index =  15 * show_hash['total_in_common'] + (10 * show_hash['imdb_rating']) + awards + nn + classification
 	li_string = "#{show_hash['total_in_common']} in common + #{show_hash['imdb_rating']} imdb rating + #{show_hash['award_nominations']} award noms + 
 	    #{show_hash['award_wins']} award wins = #{likability_index} li"
 	output.push [show, likability_index, li_string]
