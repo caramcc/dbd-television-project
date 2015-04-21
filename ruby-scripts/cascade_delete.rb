@@ -50,7 +50,16 @@ require_relative 'constants.rb'
 #   ADD CONSTRAINT caramcc_tv_shows2_ibfk_1_cascade
 #   FOREIGN KEY (network_name) REFERENCES #{$networks}(network_name) ON DELETE CASCADE;"
 # ]
+
+alter = [
+    "ALTER TABLE #{$show_languages}
+  DROP FOREIGN KEY caramcc_show_languages_ibfk_1","
+ALTER TABLE #{$show_languages}
+  ADD CONSTRAINT caramcc_show_languages_ibfk_1_cascade
+  FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id) ON DELETE CASCADE;"
+]
+]
 #
-# alter.each do |q|
-#   @client.query(q)
-# end
+alter.each do |q|
+  @client.query(q)
+end
