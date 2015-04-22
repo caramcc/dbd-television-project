@@ -12,18 +12,15 @@ require_relative 'constants.rb'
 lim = 20
 ARGV[1] == '-f' ? show_title = "%#{ARGV[0]}%" : show_title = ARGV[0]
 
-@client.query("CREATE OR REPLACE VIEW caramcc_popular_shows_genres
-  AS
-  SELECT sg.*, s.show_title, s.imdb_rating, s.network_name
-  FROM #{$tv_shows} s
-  JOIN #{$show_genres} sg ON sg.show_id = s.show_id AND s.imdb_votes > 2000 AND s.imdb_rating > 5")
+show_title = @client.escape(show_title)
+
 
 # result = @client.query("SELECT network_name FROM #{$tv_shows} ORDER BY imdb_votes DESC LIMIT 20;")
 results = {}
 
 by_genre = @client.query("SELECT s1.show_title, s1.classification as s1c, s1.network_name as s1n, s2.classification, s2.network_name, s2.imdb_rating, s2.award_wins, s2.award_nominations, DATEDIFF(s2.end_date, s2.start_date) as days_ran, s2.show_title AS s2t, COUNT(i1.genre) AS genres_in_common
 FROM #{$tv_shows} s1
-JOIN #{$tv_shows} s2 ON s1.show_title LIKE '#{show_title}' AND s2.imdb_rating > 7 AND s2.show_title NOT LIKE '#{show_title}' AND s2.imdb_votes > 1000
+JOIN #{$tv_shows} s2 ON s1.show_title LIKE '#{show_title}' AND (s2.imdb_rating > 7 OR s2.imdb_rating > s1.imdb_rating) AND s2.show_title NOT LIKE '#{show_title}' AND s2.imdb_votes > 1000
 JOIN #{$show_genres} i1 ON i1.show_id = s1.show_id
 WHERE EXISTS (SELECT 1
               FROM #{$tv_shows} s
@@ -125,11 +122,12 @@ output.sort! {|x, y| y[1] <=> x[1]}
 
 i = 0
 output.each do |value|
-  if i < 20
-	  puts "#{value[0]} (#{value[1]})"
-    # puts value[3]
+  # if i < 20
+	  puts "#{value[0]} (#{value[1]}) #{i}"
+    # puts value[2] # likability index values
+    # puts value[3] # show hash data
 	  i += 1
-  else
-    break
-  end
+  # else
+  #   break
+  # end
 end

@@ -12,11 +12,7 @@ require_relative 'constants.rb'
 lim = 20
 ARGV[1] == '-f' ? show_title = "%#{ARGV[0]}%" : show_title = ARGV[0]
 
-@client.query("CREATE OR REPLACE VIEW caramcc_popular_shows_genres
-  AS
-  SELECT sg.*, s.show_title, s.imdb_rating, s.network_name
-  FROM #{$tv_shows} s
-  JOIN #{$show_genres} sg ON sg.show_id = s.show_id AND s.imdb_votes > 2000 AND s.imdb_rating > 5")
+show_title = @client.escape(show_title)
 
 result = @client.query("SELECT *, DATEDIFF(end_date, start_date) as days_ran
 	FROM #{$tv_shows} WHERE show_title LIKE '#{show_title}'")
