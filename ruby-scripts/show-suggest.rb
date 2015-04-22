@@ -16,14 +16,22 @@ def blank?(object)
   end
 end
 
-
-if ARGV[1] == '-f'
-  show_title = "%#{ARGV[0]}%"
-else
-  show_title = ARGV[0]
-  lim = ARGV[1]
+flags = []
+args = []
+ARGV.each do |arg|
+  if arg[0] == '-'
+    flags.push arg
+  else
+    args.push arg
+  end
 end
-lim ||= ARGV[2]
+
+if flags.include? '-f'
+  show_title = "%#{args[0]}%"
+else
+  show_title = args[0]
+  lim = args[1]
+end
 lim ||= 20
 
 show_title = @client.escape(show_title)
@@ -128,8 +136,9 @@ results.each do |show, show_hash|
   awards = [5 * (show_hash['award_nominations'] + show_hash['award_wins']), 50].min
 
 	likability_index =  20 * show_hash['total_in_common'] + (10 * show_hash['imdb_rating']) + awards + nn + classification
-	li_string = "#{show_hash['total_in_common']} in common | #{show_hash['imdb_rating']} imdb rating | #{awards} award pts
-        | #{classification} class | #{nn} network |||| #{likability_index} li"
+	li_string =
+"        #{show_hash['total_in_common']} in common | #{show_hash['imdb_rating']} imdb rating | #{awards} award pts
+        #{classification} class | #{nn} network |||| #{likability_index} li"
   unless blank?(show.strip)
 	  output.push [show, likability_index, li_string, show_hash]
   end
@@ -141,8 +150,10 @@ i = 1
 output.each do |value|
   if i <= lim.to_i
 	  puts "#{i}: #{value[0]} (#{value[1]})"
-    # puts value[2] # likability index values
-    # puts value[3] # show hash data
+    if flags.include? '-d'
+      puts value[2] # likability index values
+      # puts value[3] # show hash data
+    end
 	  i += 1
   else
     break
