@@ -8,9 +8,23 @@ require_relative 'constants.rb'
 
 @client.query("USE #{$db_name}")
 
+def blank?(object)
+  if object.instance_of?(Array) || object.instance_of?(Hash)
+    return object.nil? || object.length == 0
+  else
+    return object.nil? || object.strip == ''
+  end
+end
 
-lim = 20
-ARGV[1] == '-f' ? show_title = "%#{ARGV[0]}%" : show_title = ARGV[0]
+
+if ARGV[1] == '-f'
+  show_title = "%#{ARGV[0]}%"
+else
+  show_title = ARGV[0]
+  lim = ARGV[1]
+end
+lim ||= ARGV[2]
+lim ||= 20
 
 show_title = @client.escape(show_title)
 
@@ -110,24 +124,27 @@ output = []
 results.each do |show, show_hash|
   show_hash['network_name'] == s1['network_name'] ? nn = 30 : nn = 0
   show_hash['classification'] == s1['classification'] ? classification = 50 : classification = 0
-	show_hash['days_ran'] <= 200 ? awards = 0 : awards = (365 * (show_hash['award_nominations'] + (2 * show_hash['award_wins']))) / show_hash['days_ran']
+	# show_hash['days_ran'] <= 200 ? awards = 0 : awards = (365 * (show_hash['award_nominations'] + (2 * show_hash['award_wins']))) / show_hash['days_ran']
+  awards = [5 * (show_hash['award_nominations'] + show_hash['award_wins']), 50].min
 
 	likability_index =  20 * show_hash['total_in_common'] + (10 * show_hash['imdb_rating']) + awards + nn + classification
 	li_string = "#{show_hash['total_in_common']} in common | #{show_hash['imdb_rating']} imdb rating | #{awards} award pts
         | #{classification} class | #{nn} network |||| #{likability_index} li"
-	output.push [show, likability_index, li_string, show_hash]
+  unless blank?(show.strip)
+	  output.push [show, likability_index, li_string, show_hash]
+  end
 end
 
 output.sort! {|x, y| y[1] <=> x[1]}
 
-i = 0
+i = 1
 output.each do |value|
-  # if i < 20
-	  puts "#{value[0]} (#{value[1]}) #{i}"
+  if i <= lim.to_i
+	  puts "#{i}: #{value[0]} (#{value[1]})"
     # puts value[2] # likability index values
     # puts value[3] # show hash data
 	  i += 1
-  # else
-  #   break
-  # end
+  else
+    break
+  end
 end
