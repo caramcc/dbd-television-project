@@ -11,13 +11,13 @@ require_relative '../constants.rb'
 
 lim = 20
 
-@client.query("CREATE OR REPLACE VIEW caramcc_popular_shows_genres
+@client.query("CREATE OR REPLACE VIEW caramcc_all_shows_languages
   AS
-  SELECT sg.*, s.show_title, s.imdb_rating, s.network_name
+  SELECT sl.*, s.show_title
   FROM #{$tv_shows} s
-  JOIN #{$show_genres} sg ON sg.show_id = s.show_id AND s.imdb_votes > 2000 AND s.imdb_rating > 5")
+  JOIN #{$show_languages} sl ON sl.show_id = s.show_id")
 
-result = @client.query("SELECT DATEDIFF(end_date, start_date) as days_ran FROM #{$tv_shows} WHERE show_title LIKE '%clone%'")
+result = @client.query("SELECT show_title FROM caramcc_all_shows_languages WHERE language LIKE '%RU%'")
 
 # result = @client.query("SELECT s1.show_title AS s1t, s2.show_title AS s2t, COUNT(i1.genre) AS genres_in_common
 # FROM #{$tv_shows} s1
@@ -98,7 +98,7 @@ result = @client.query("SELECT DATEDIFF(end_date, start_date) as days_ran FROM #
 # end
 
 result.each do |row|
-  puts "#{row['seasons']}"
+  puts "#{row['show_title']}"
 end
 
 # result.each do |row|

@@ -130,7 +130,7 @@ end
 output = []
 
 results.each do |show, show_hash|
-  show_hash['network_name'] == s1['network_name'] ? nn = 30 : nn = 0
+  show_hash['network_name'] == s1['network_name'] ? nn = 20 : nn = 0
   show_hash['classification'] == s1['classification'] ? classification = 50 : classification = 0
 	# show_hash['days_ran'] <= 200 ? awards = 0 : awards = (365 * (show_hash['award_nominations'] + (2 * show_hash['award_wins']))) / show_hash['days_ran']
   awards = [5 * (show_hash['award_nominations'] + show_hash['award_wins']), 50].min
