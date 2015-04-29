@@ -17,6 +17,7 @@ require_relative 'constants.rb'
 @client.query("DROP TABLE #{$actors}")
 @client.query("DROP TABLE #{$creators}")
 @client.query("DROP TABLE #{$networks}")
+@client.query("DROP TABLE #{$updates}")
 
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$networks} (
@@ -108,4 +109,10 @@ require_relative 'constants.rb'
   language varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (show_id, language),
   FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id) ON DELETE CASCADE
+);")
+
+@client.query("CREATE TABLE IF NOT EXISTS #{$updates} (
+  update_id int(11) NOT NULL,
+  update_unix_time int(33) NOT NULL DEFAULT 0,
+  PRIMARY KEY (update_id)
 );")

@@ -11,6 +11,8 @@ $show_alt_titles = 'caramcc_show_alt_titles'
 
 $networks = 'caramcc_networks'
 
+$updates = 'caramcc_updates'
+
 # Local
 $db_name = 'caramcc_dbd_project'
 $host = 'localhost'

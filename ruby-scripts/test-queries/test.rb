@@ -17,7 +17,8 @@ lim = 20
   FROM #{$tv_shows} s
   JOIN #{$show_languages} sl ON sl.show_id = s.show_id")
 
-result = @client.query("SELECT show_title FROM caramcc_all_shows_languages WHERE language LIKE '%RU%'")
+result = @client.query("SELECT COUNT(*) FROM #{$tv_shows} WHERE imdb_id LIKE ''")
+# result = @client.query("SELECT show_title FROM caramcc_all_shows_languages WHERE language LIKE '%RU%'")
 
 # result = @client.query("SELECT s1.show_title AS s1t, s2.show_title AS s2t, COUNT(i1.genre) AS genres_in_common
 # FROM #{$tv_shows} s1
@@ -97,8 +98,12 @@ result = @client.query("SELECT show_title FROM caramcc_all_shows_languages WHERE
 #   puts "#{row['s1t']} and #{row['s2t']} [#{row['genres_in_common']} genres in common]"
 # end
 
+# result.each do |row|
+#   puts "#{row['show_title']}"
+# end
+
 result.each do |row|
-  puts "#{row['show_title']}"
+  puts "#{row['COUNT(*)']}"
 end
 
 # result.each do |row|
