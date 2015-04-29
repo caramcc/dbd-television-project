@@ -48,7 +48,7 @@ require_relative 'constants.rb'
   flagged tinyint(1) NOT NULL DEFAULT '0',
   flag varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (show_id),
-  FOREIGN KEY (network_name) REFERENCES #{$networks}(network_name)
+  FOREIGN KEY (network_name) REFERENCES #{$networks}(network_name) ON DELETE CASCADE
 );")
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$actors} (
@@ -69,8 +69,8 @@ require_relative 'constants.rb'
   show_id int(11) NOT NULL,
   actor_id int(11) NOT NULL,
   PRIMARY KEY (show_id, actor_id),
-  FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id),
-  FOREIGN KEY (actor_id) REFERENCES #{$actors}(actor_id)
+  FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id) ON DELETE CASCADE,
+  FOREIGN KEY (actor_id) REFERENCES #{$actors}(actor_id) ON DELETE CASCADE
 );")
 
 
@@ -78,34 +78,34 @@ require_relative 'constants.rb'
   show_id int(11) NOT NULL,
   creator_id int(11) NOT NULL,
   PRIMARY KEY (show_id, creator_id),
-  FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id),
-  FOREIGN KEY (creator_id) REFERENCES #{$creators}(creator_id)
+  FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id) ON DELETE CASCADE,
+  FOREIGN KEY (creator_id) REFERENCES #{$creators}(creator_id) ON DELETE CASCADE
 );")
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$show_genres} (
   show_id int(11) NOT NULL,
   genre varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (show_id, genre),
-  FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id)
+  FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id) ON DELETE CASCADE
 );")
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$show_airdays} (
   show_id int(11) NOT NULL,
   airday varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (show_id, airday),
-  FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id)
+  FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id) ON DELETE CASCADE
 );")
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$show_alt_titles} (
   show_id int(11) NOT NULL,
   alt_title varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (show_id, alt_title),
-  FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id)
+  FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id) ON DELETE CASCADE
 );")
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$show_languages} (
   show_id int(11) NOT NULL,
   language varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (show_id, language),
-  FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id)
+  FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id) ON DELETE CASCADE
 );")
