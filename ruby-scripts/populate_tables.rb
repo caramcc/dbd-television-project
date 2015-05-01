@@ -228,5 +228,22 @@ def populate_twitter_data
   end
 end
 
-process_data(load_data)
+def populate_update_table
+  updates = @client.query("SELECT update_id FROM #{$updates} DESC LIMIT 1;")
 
+  has_updated = false
+
+  updates.each do |update|
+    if update
+      has_updated = true
+    end
+  end
+
+  unless has_updated
+    @client.query("INSERT INTO #{$updates} (update_unix_time) VALUES ('#{$first_update}')")
+  end
+end
+
+process_data(load_data)
+populate_twitter_data
+populate_update_table

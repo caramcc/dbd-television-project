@@ -8,7 +8,7 @@ require_relative 'constants.rb'
 
 @client.query("USE #{$db_name}")
 
-imdb_shows = @client.query("SELECT imdb_id FROM #{$tv_shows} WHERE imdb_id NOT LIKE '';")
+imdb_shows = @client.query("SELECT imdb_id FROM #{$tv_shows} WHERE show_id > 16696 AND imdb_id NOT LIKE '';")
 
 imdb_shows.each do |show|
   imdb_id = show['imdb_id']
@@ -17,7 +17,12 @@ imdb_shows.each do |show|
   omdb_show_uri = URI.parse(omdb_show_url)
   omdb_show_response = Net::HTTP.get_response(omdb_show_uri)
 
-  omdb_data = JSON.parse(@client.escape(omdb_show_response.body))
+  begin
+    omdb_data = JSON.parse(omdb_show_response.body)
+  rescue JSON::ParserError
+    puts imdb_id
+    next
+  end
 
   if omdb_data["Response"] == 'True'
 
