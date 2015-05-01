@@ -87,10 +87,12 @@ def update_imdb(imdb_id, show_data)
     show_data["imdb_rating"] = omdb_data["imdbRating"]
     show_data["imdb_votes"] = omdb_data["imdbVotes"]
 
-
-    show_data["genres"].concat omdb_data["Genre"].split(",").map {|x| x.strip}
-
+    begin
+    show_data["genres"].concat(omdb_data["Genre"].split(",").map {|x| x.strip})
     show_data.uniq!
+    rescue NoMethodError
+      puts show_data
+    end
 
     if blank?(show_data["runtime"])
       show_data["runtime"] = omdb_data["Runtime"]
