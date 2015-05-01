@@ -7,7 +7,7 @@ require 'mysql2'
 require_relative 'constants'
 
 
-@client = Mysql2::Client.new(:host => $host, :username => $username)
+@client = Mysql2::Client.new(:host => $host, :username => $username, :password => $password)
 
 @client.query("USE #{$db_name}")
 
