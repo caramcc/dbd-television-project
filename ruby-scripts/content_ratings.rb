@@ -8,7 +8,7 @@ require_relative 'constants.rb'
 
 @client.query("USE #{$db_name}")
 
-imdb_shows = @client.query("SELECT imdb_id FROM #{$tv_shows} WHERE show_id > 16696 AND imdb_id NOT LIKE '';")
+imdb_shows = @client.query("SELECT imdb_id FROM #{$tv_shows} WHERE imdb_id NOT LIKE '';")
 
 imdb_shows.each do |show|
   imdb_id = show['imdb_id']
