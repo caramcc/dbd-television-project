@@ -45,6 +45,7 @@ TV Rage API is also used to populate the table with the majority of the fields.
 
 - `imdb_updates.rb` - Looks for IMDb data for all shows without an `imdb_id`. Will take awhile to run and make a lot of API calls. Should be run once or twice per month.
 
+- `ruby update_one.rb [--imdb | --tvr] <show_id> <imdb_id | tvrage_id>` - manually update the imdb data or tvrage data for a given show, given a new `imdb_id` or `tvrage_id`. Params are: flag to denote whether the imdb data or tvrage data is being updated, the `show_id` of the show in question, the new `imdb_id` or `tvrage_id`
 
 
 ## Runnable Scripts
@@ -55,7 +56,6 @@ These scripts can be executed from the command line with arguments to execute ce
 
 - `ruby id_del.rb <*show_ids>` - deletes the tv show with the specified `show_id`s, e.g. `ruby id_del.rb 123 901 292` will delete the shows with IDs 123, 901, and 292.
 
-- `ruby update_one.rb [--imdb | --tvr] <show_id> <imdb_id | tvrage_id>` - manually update the imdb data or tvrage data for a given show, given a new `imdb_id` or `tvrage_id`. Params are: flag to denote whether the imdb data or tvrage data is being updated, the `show_id` of the show in question, the new `imdb_id` or `tvrage_id`
 
 - `ruby show-suggest <show_title> <n> [-f] [-d]` - finds `n` shows most similar to the given `show_title`. The optional flag `-f` does a wildcard search on the given `show_title` (`LIKE '%show_title%'`). The optional flag `-d` provides some details about the match relevance.
 

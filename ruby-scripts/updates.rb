@@ -80,3 +80,5 @@ new_show_ids.each do |tvrage_id|
   puts "Adding NEW record for TVR #{tvrage_id} (title: #{show_title} (#{start_year})"
   new_record(update_imdb(search_for_imdb(show_title, start_year), show_hash))
 end
+
+@client.query("INSERT INTO #{$updates} (update_unix_time) VALUES ('#{now}')")

@@ -65,6 +65,7 @@ def update_imdb(imdb_id, show_data)
     show_data["writers"] = omdb_data["Writer"].split(",").map {|x| x.strip}
     show_data["actors"] = omdb_data["Actors"].split(",").map {|x| x.strip}
     show_data["plot_summary"] = omdb_data["Plot"]
+    show_data["content_rating"] = omdb_data["Rated"]
 
 
     # add Awards: regex for "X wins & Y nominations."
