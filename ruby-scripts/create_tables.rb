@@ -8,17 +8,21 @@ require_relative 'constants.rb'
 @client.query("CREATE DATABASE IF NOT EXISTS #{$db_name}")
 @client.query("USE #{$db_name}")
 
-@client.query("DROP TABLE #{$show_alt_titles}")
-@client.query("DROP TABLE #{$show_actors}")
-@client.query("DROP TABLE #{$show_creators}")
-@client.query("DROP TABLE #{$show_genres}")
-@client.query("DROP TABLE #{$show_languages}")
-@client.query("DROP TABLE #{$show_airdays}")
-@client.query("DROP TABLE #{$tv_shows}")
-@client.query("DROP TABLE #{$actors}")
-@client.query("DROP TABLE #{$creators}")
-@client.query("DROP TABLE #{$networks}")
-@client.query("DROP TABLE #{$updates}")
+begin
+  @client.query("DROP TABLE #{$show_alt_titles}")
+  @client.query("DROP TABLE #{$show_actors}")
+  @client.query("DROP TABLE #{$show_creators}")
+  @client.query("DROP TABLE #{$show_genres}")
+  @client.query("DROP TABLE #{$show_languages}")
+  @client.query("DROP TABLE #{$show_airdays}")
+  @client.query("DROP TABLE #{$tv_shows}")
+  @client.query("DROP TABLE #{$actors}")
+  @client.query("DROP TABLE #{$creators}")
+  @client.query("DROP TABLE #{$networks}")
+  @client.query("DROP TABLE #{$updates}")
+rescue Mysql2::Error
+  puts 'old tables not found'
+end
 
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$networks} (
