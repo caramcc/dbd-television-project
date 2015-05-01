@@ -1,3 +1,22 @@
+# Set Up
+
+1. Clone or Fork this GitHub Repository.
+
+1. `cd` into `ruby-scripts/`.
+
+1. Modify database info in `constants.rb` as follows:
+   - set `$db_name` to the name of the database being used
+   - set `$host` to the host address, usually `'localhost'`
+   - set `$username` to the user accessing the database, usually `'root'`
+   - set `$password` to the user's password, if necessary
+
+1. Run `ruby create_tables.rb` to create all the tables.
+
+1. Run `ruby populate_tables.rb` to populate the tables with the starter JSON (located in `ruby-scripts/output-data/`) May take several minutes.
+
+1. Run `ruby content_ratings.rb` to add content ratings to tv_shows table. This may take awhile, as content ratings were not stored in initial starter JSON. Makes API calls to OMDB.
+
+
 # Sources of Data:
 
 [TV Rage API](http://services.tvrage.com/info.php?page=main) is used to generate a list of the TV Shows that will be included in the table.
@@ -9,21 +28,50 @@ TV Rage API is also used to populate the table with the majority of the fields.
 
 # Scripts
 
+## Setup Scripts
+
+- `create_tables.rb` - used to create all tables.
+
+- `populate_tables.rb` - used to fill all tv_show related tables and the tables that map between them.
+
+- `content_ratings.rb` - used to add content ratings to tv_shows table, pulling data directly from OMDb.
+
+
+## Data Updating Scripts
+
+- `updates.rb` - Queries tvrage for any changes since the last update. Updates shows accordingly. Should be run between once per day and once per week.
+
+- `imdb_updates.rb` - Looks for IMDb data for all shows without an `imdb_id`. Will take awhile to run and make a lot of API calls. Should be run once or twice per month.
+
+
+
+## Runnable Scripts
+
+These scripts can be executed from the command line with arguments to execute certain queries. They are located in `ruby-scripts/`.
+
+- `ruby details.rb <show_title> [-f]` - outputs all of the fields for the show with the specified `show_title`. The optional flag `-f` matches a show that contains the title string, i.e., performs a query `WHERE show_title LIKE '%show_title%'`
+
+- `ruby id_del.rb <*show_ids>` - deletes the tv show with the specified `show_id`s, e.g. `ruby id_del.rb 123 901 292` will delete the shows with IDs 123, 901, and 292.
+
+- `ruby update_one.rb [--imdb | --tvr] <show_id> <imdb_id | tvrage_id>` - manually update the imdb data or tvrage data for a given show, given a new `imdb_id` or `tvrage_id`. Params are: flag to denote whether the imdb data or tvrage data is being updated, the `show_id` of the show in question, the new `imdb_id` or `tvrage_id`
+
+- `ruby show-suggest <show_title> <n> [-f] [-d]` - finds `n` shows most similar to the given `show_title`. The optional flag `-f` does a wildcard search on the given `show_title` (`LIKE '%show_title%'`). The optional flag `-d` provides some details about the match relevance.
+
+
+## Data Acquisition Scripts
+
 The data was downloaded and reformatted using the following scripts, located in the `ruby-scripts/` directory:
 
 - `tv_show_titles.rb` - used to get the primary list of all TV shows to include in the table. It writes the titles to a json file, which is read by another script.
 
 - `threaded_tv_show_data.rb` - used to get the majority of the data on each TV show. Reads from the previously generated json file to get the list of shows to look up, then query both the TV Rage API and the OMDb API for more detailed data about each show. Writes the output to a json file in the form `caramcc_tv_show_data_*.json`.
 
-- `query_table.rb` - when run in command line with the args `show title` and `network`, queries database and produces a list of show titles for shows that contain both params. Pass an empty string to either field to generate all show titles for a given network, or shows whose titles contain a certain string across all networks. Will be renamed eventually.
+- `nsy_threaded_tv_show_data.rb` - similar to `threaded_tv_show_data.rb`, but does not match start year for the TV shows when searching for data on OMDb.
 
 - `sort_through_flags.rb` - generates json file of each flagged show, sorted by flag, for manual review.
 
 - `scraperbot/twitter_handle_scraper.rb` - used to scrape twitter handles from FanPageList.
 
-- `populate_tables.rb` - used to fill the following tables: TV_Shows, Actors, Creators, the tables that map between them, and `show_genres`, `show_airdays`, `show_languages`, and `show_alt_titles`, which provide atomic representations of non-atomic data.
-
-- `populate_networks_and_show_handles.rb` - used to fill the Networks table, as well as to add twitter handle data about TV Shows and Networks.
 
 
 
