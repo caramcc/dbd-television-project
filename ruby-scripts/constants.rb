@@ -21,6 +21,7 @@ $first_update = 1426550400 # 17 Mar 2015
 
 # acceptable TV Rage Fields
 $tvr_fields = %w(showname origin_country startdate ended classification runtime airtime airday timezone)
+$tvr_arrays = %w(genres akas)
 
 # acceptable OMDB fields
 
