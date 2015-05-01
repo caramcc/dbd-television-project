@@ -11,7 +11,7 @@ require_relative 'constants'
 
 @client.query("USE #{$db_name}")
 
-result = @client.query("SELECT * FROM #{@table} WHERE flagged=1;")
+result = @client.query("SELECT * FROM #{$tv_shows} WHERE flagged=1;")
 
 flags = {}
 result.each do |row|
@@ -33,6 +33,17 @@ result.each do |row|
       tvr_id: flags[flag][:tvr_id].push(tvr_id),
       imdb_id: flags[flag][:imdb_id].push(imdb_id)
     }
+  end
+end
+
+
+flags.each do |flag, shows|
+  if shows.length > 20
+    shows.each do |show|
+      @client.query("UPDATE #{$tv_shows} WHERE tvrage_id = #{show[:tvr_id]} SET flagged='0', flag='';")
+    end
+    puts "Removed flag: #{flag}"
+    flags[flag].delete!
   end
 end
 
