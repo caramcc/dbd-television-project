@@ -17,7 +17,7 @@ imdb_shows.each do |show|
   omdb_show_uri = URI.parse(omdb_show_url)
   omdb_show_response = Net::HTTP.get_response(omdb_show_uri)
 
-  omdb_data = JSON.parse(omdb_show_response.body)
+  omdb_data = JSON.parse(@client.escape(omdb_show_response.body))
 
   if omdb_data["Response"] == 'True'
 

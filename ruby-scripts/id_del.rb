@@ -7,6 +7,6 @@ require_relative 'constants.rb'
 
 @client.query("USE #{$db_name}")
 
-show_id = ARGV[0]
-
-@client.query("DELETE FROM #{$tv_shows} WHERE show_id = #{show_id}")
+ARGV.each do |show_id|
+  @client.query("DELETE FROM #{$tv_shows} WHERE show_id = #{show_id}")
+end
