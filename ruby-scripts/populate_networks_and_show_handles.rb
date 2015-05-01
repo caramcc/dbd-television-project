@@ -14,11 +14,6 @@ end
 
 networks = networks.map{|i| i.downcase}.uniq
 
-# networks.each do |network|
-#   unless network.nil? || network == ''
-#     @client.query("INSERT INTO #{$networks} (network_name) VALUES ('#{network}');")
-#   end
-# end
 
 file_path = 'caramcc_twitter_handles.json'
 file = File.read(file_path)
