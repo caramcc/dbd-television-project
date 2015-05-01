@@ -28,9 +28,9 @@ begin
   tvr_updates_data = XmlSimple.xml_in(tvrage_updates_response.body)
 
   tvr_updates_data['show'].each do |show|
-    tvr_ids.push show['id']
+    tvr_ids.push show['id'][0]
   end
-rescue EOFError, Net::ReadTimeout => e
+rescue EOFError => e
   puts e.message
 end
 
@@ -51,7 +51,7 @@ tvr_ids.each do |tvrage_id|
     tvrage_show_response = Net::HTTP.get_response(tvrage_show_uri)
 
     tvr_data = XmlSimple.xml_in(tvrage_show_response.body)
-  rescue EOFError, Net::ReadTimeout => e
+  rescue EOFError => e
     puts e.message
     puts tvrage_id
   end
@@ -64,8 +64,8 @@ tvr_ids.each do |tvrage_id|
     updated_show_result.each do |row|
       show_id = row['show_id']
       show_title = row['show_title']
-      start_year = row['start_date'][0..3]
-      start_year == '1000' ? start_year = nil : true
+      start_year = row['start_date'].year
+      start_year == 1000 ? start_year = nil : true
       puts "updating record for TVR #{tvrage_id} (title: #{show_title} (#{start_year})"
       update_record(update_imdb(search_for_imdb(show_title, start_year), update_tvr(tvrage_id)), show_id)
     end
@@ -75,8 +75,8 @@ end
 new_show_ids.each do |tvrage_id|
   show_hash = update_tvr(tvrage_id)
   show_title = show_hash['title']
-  start_year = show_hash['start_date'][0..3]
-  start_year == '1000' ? start_year = nil : true
+  start_year = show_hash['start_date'].year
+  start_year == 1000 ? start_year = nil : true
   puts "Adding NEW record for TVR #{tvrage_id} (title: #{show_title} (#{start_year})"
   new_record(update_imdb(search_for_imdb(show_title, start_year), show_hash))
 end

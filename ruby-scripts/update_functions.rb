@@ -34,7 +34,7 @@ def search_for_imdb(show_title, start_year = nil)
   imdb_id = ''
   unless omdb_id_data["Response"] == "False"
     if omdb_id_data["Search"].length < 2
-      show_data["imdb_id"] = omdb_id_data["Search"][0]["imdbID"]
+      imdb_id = omdb_id_data["Search"][0]["imdbID"]
     elsif omdb_id_data["Search"].length == 0
       puts "no omdb data for #{show_title}"
     else
@@ -88,7 +88,9 @@ def update_imdb(imdb_id, show_data)
     show_data["imdb_votes"] = omdb_data["imdbVotes"]
 
 
-    show_data["genres"] = show_data["genres"] | omdb_data["Genre"].split(",").map {|x| x.strip}
+    show_data["genres"].concat omdb_data["Genre"].split(",").map {|x| x.strip}
+
+    show_data.uniq!
 
     if blank?(show_data["runtime"])
       show_data["runtime"] = omdb_data["Runtime"]
@@ -136,6 +138,7 @@ def update_tvr(tvrage_id)
     show_data["end_date"] = tvr_data["ended"][0]
     show_data["classification"] = tvr_data["classification"][0]
     show_data["genres"] = tvr_data["genres"][0]["genre"]
+    show_data["genres"] ||= []
     show_data["runtime"] = tvr_data["runtime"][0]
 
     tvr_data["network"].each do |network|
@@ -237,14 +240,13 @@ def update_record(row, show_id)
         plot_summary = '#{row["plot_summary"]}', award_nominations = '#{award_nominations}', award_wins = '#{award_wins}',
         imdb_rating ='#{imdb_rating}', imdb_votes = '#{imdb_votes}', imdb_id = '#{row["imdb_id"]}', tvrage_id = '#{tvrage_id}', flagged = '#{flagged}',
         flag = '#{row["flag"]}'
-        WHERE show_id = #{@show_id};"
+        WHERE show_id = #{show_id};"
 
     @client.query(insert_into_shows)
 
-    show_id = @show_id
 
     if row['genres'].instance_of?(Array)
-      @client.query("DELETE FROM #{$show_genres} WHERE show_id = #{@show_id}")
+      @client.query("DELETE FROM #{$show_genres} WHERE show_id = #{show_id}")
       row['genres'].each do |genre|
         begin
           genre = @client.escape(genre)
@@ -258,7 +260,7 @@ def update_record(row, show_id)
     end
 
     if row['languages'].instance_of?(Array)
-      @client.query("DELETE FROM #{$show_languages} WHERE show_id = #{@show_id}")
+      @client.query("DELETE FROM #{$show_languages} WHERE show_id = #{show_id}")
       row['languages'].each do |language|
         language = @client.escape(language)
         @client.query("INSERT INTO #{$show_languages} (show_id, language) VALUES (#{show_id}, '#{language}');")
@@ -266,7 +268,7 @@ def update_record(row, show_id)
     end
 
     if row['airday'].instance_of?(Array)
-      @client.query("DELETE FROM #{$show_airdays} WHERE show_id = #{@show_id}")
+      @client.query("DELETE FROM #{$show_airdays} WHERE show_id = #{show_id}")
       row['airday'].each do |airday|
         airday = @client.escape(airday)
         @client.query("INSERT INTO #{$show_airdays} (show_id, airday) VALUES (#{show_id}, '#{airday}');")
@@ -274,7 +276,7 @@ def update_record(row, show_id)
     end
 
     if row['alternate_titles'].instance_of?(Array)
-      @client.query("DELETE FROM #{$show_alt_titles} WHERE show_id = #{@show_id}")
+      @client.query("DELETE FROM #{$show_alt_titles} WHERE show_id = #{show_id}")
       row['alternate_titles'].each do |title|
         title = @client.escape(title)
         @client.query("INSERT INTO #{$show_alt_titles} (show_id, alt_title) VALUES (#{show_id}, '#{title}');")
@@ -282,7 +284,7 @@ def update_record(row, show_id)
     end
 
     if row['actors'].instance_of?(Array)
-      @client.query("DELETE FROM #{$show_actors} WHERE show_id = #{@show_id}")
+      @client.query("DELETE FROM #{$show_actors} WHERE show_id = #{show_id}")
       row['actors'].each do |actor|
 
         actor = @client.escape(actor)
@@ -314,7 +316,7 @@ def update_record(row, show_id)
 
 
     if row['writers'].instance_of?(Array)
-      @client.query("DELETE FROM #{$show_creators} WHERE show_id = #{@show_id}")
+      @client.query("DELETE FROM #{$show_creators} WHERE show_id = #{show_id}")
       row['writers'].each do |creator|
 
         creator = @client.escape(creator)
