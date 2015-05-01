@@ -138,7 +138,9 @@ def update_tvr(tvrage_id)
     show_data["end_date"] = tvr_data["ended"][0]
     show_data["classification"] = tvr_data["classification"][0]
     show_data["genres"] = tvr_data["genres"][0]["genre"]
-    show_data["genres"] ||= []
+    unless show_data["genres"].instance_of?(Array)
+      show_data["genres"] = []
+    end
     show_data["runtime"] = tvr_data["runtime"][0]
 
     tvr_data["network"].each do |network|
