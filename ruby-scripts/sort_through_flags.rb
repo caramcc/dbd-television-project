@@ -47,6 +47,6 @@ flags.each do |flag, shows|
   end
 end
 
-output_file_path = 'caramcc_sort_flags.json'
+output_file_path = "caramcc_flags_#{Time.now.to_i}.json"
 
 File.open(output_file_path, 'a') { |file| file.write(JSON.pretty_generate(flags)) }

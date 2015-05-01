@@ -229,7 +229,7 @@ def populate_twitter_data
 end
 
 def populate_update_table
-  updates = @client.query("SELECT update_id FROM #{$updates} DESC LIMIT 1;")
+  updates = @client.query("SELECT update_id FROM #{$updates} ORDER BY update_unix_time DESC LIMIT 1;")
 
   has_updated = false
 
