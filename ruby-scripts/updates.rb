@@ -4,6 +4,7 @@ require 'mysql2'
 require 'xmlsimple'
 
 require_relative 'constants.rb'
+require_relative 'update_functions.rb'
 
 @client = Mysql2::Client.new(:host => $host, :username => $username, :password => $password)
 
@@ -34,6 +35,9 @@ rescue EOFError, Net::ReadTimeout => e
 end
 
 # find all shows that have been updated in DB
+new_show_ids = []
+
+tvr_ids.uniq!
 
 tvr_ids.each do |tvrage_id|
 
@@ -54,53 +58,25 @@ tvr_ids.each do |tvrage_id|
 
   updated_show_result = @client.query("SELECT * FROM #{$tv_shows} WHERE tvrage_id = #{tvrage_id}")
 
-  updated_show_result.each do |row|
-
-
-  end
-
-
-
-  begin
-
-    show_data["title"] = tvr_data["showname"][0]
-    show_data["country"] = tvr_data["origin_country"][0]
-    show_data["tvrage_id"] = tvrage_id
-
-    show_data["start_date"] = tvr_data["startdate"][0]
-    show_data["end_date"] = tvr_data["ended"][0]
-    show_data["classification"] = tvr_data["classification"][0]
-    show_data["genres"] = tvr_data["genres"][0]["genre"]
-    show_data["runtime"] = tvr_data["runtime"][0]
-
-    tvr_data["network"].each do |network|
-      if network["country"] == show_data["country"]
-        show_data["network"] = network["content"]
-      end
+  if updated_show_result.nil?
+    new_show_ids.push tvrage_id
+  else
+    updated_show_result.each do |row|
+      show_id = row['show_id']
+      show_title = row['show_title']
+      start_year = row['start_date'][0..3]
+      start_year == '1000' ? start_year = nil : true
+      puts "updating record for TVR #{tvrage_id} (title: #{show_title} (#{start_year})"
+      update_record(update_imdb(search_for_imdb(show_title, start_year), update_tvr(tvrage_id)), show_id)
     end
-    show_data["airtime"] = tvr_data["airtime"][0]
-    show_data["timezone"] = tvr_data["timezone"][0]
-    show_data["airday"] = tvr_data["airday"][0]
-
-    alternate_titles = {}
-
-    tvr_data["akas"][0]["aka"].each do |aka|
-      if aka.kind_of?(String)
-        alternate_titles["Alternate title"] = aka["content"]
-      elsif aka["country"] == show_data["country"] && !aka["attr"].nil?
-        alternate_titles[aka["attr"]] = aka["content"]
-      elsif aka["country"].nil?
-        alternate_titles["Alternate title"] = aka["content"]
-      else
-        alternate_titles[aka["country"]] = aka["content"]
-      end
-    end
-
-    show_data["alternate_titles"] = alternate_titles
-  rescue NoMethodError => e
-    puts e.backtrace[0]
-    puts "TVRage ID: #{tvrage_id}"
   end
+end
 
-
+new_show_ids.each do |tvrage_id|
+  show_hash = update_tvr(tvrage_id)
+  show_title = show_hash['title']
+  start_year = show_hash['start_date'][0..3]
+  start_year == '1000' ? start_year = nil : true
+  puts "Adding NEW record for TVR #{tvrage_id} (title: #{show_title} (#{start_year})"
+  new_record(update_imdb(search_for_imdb(show_title, start_year), show_hash))
 end

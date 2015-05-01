@@ -37,7 +37,9 @@ TV Rage API is also used to populate the table with the majority of the fields.
 - `content_ratings.rb` - used to add content ratings to tv_shows table, pulling data directly from OMDb.
 
 
-## Data Updating Scripts
+## Data Maintenance Scripts
+
+- `sort_through_flags.rb` - removes flags from shows likely to be correct, then generates json file of each remaining flagged show, sorted by flag, for manual review.
 
 - `updates.rb` - Queries tvrage for any changes since the last update. Updates shows accordingly. Should be run between once per day and once per week.
 
@@ -67,8 +69,6 @@ The data was downloaded and reformatted using the following scripts, located in 
 - `threaded_tv_show_data.rb` - used to get the majority of the data on each TV show. Reads from the previously generated json file to get the list of shows to look up, then query both the TV Rage API and the OMDb API for more detailed data about each show. Writes the output to a json file in the form `caramcc_tv_show_data_*.json`.
 
 - `nsy_threaded_tv_show_data.rb` - similar to `threaded_tv_show_data.rb`, but does not match start year for the TV shows when searching for data on OMDb.
-
-- `sort_through_flags.rb` - generates json file of each flagged show, sorted by flag, for manual review.
 
 - `scraperbot/twitter_handle_scraper.rb` - used to scrape twitter handles from FanPageList.
 

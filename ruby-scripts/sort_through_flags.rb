@@ -40,10 +40,10 @@ end
 flags.each do |flag_text, flag|
   if flag[:count] > 20
     flag[:tvr_id].each do |tvr_id|
-      @client.query("UPDATE #{$tv_shows}SET flagged='0', flag='' WHERE tvrage_id=#{tvr_id} ;")
+      @client.query("UPDATE #{$tv_shows} SET flagged='0', flag='' WHERE tvrage_id=#{tvr_id} ;")
     end
     puts "Removed flag: #{flag_text}"
-    flags[flag_text].delete!
+    flags.delete(flag_text)
   end
 end
 
