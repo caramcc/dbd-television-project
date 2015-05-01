@@ -1,10 +1,10 @@
-$tv_shows = 'caramcc_tv_shows2'
+$tv_shows = 'caramcc_tv_shows'
 $actors = 'caramcc_actors'
 $show_actors = 'caramcc_show_actors'
 $creators = 'caramcc_creators'
 $show_creators = 'caramcc_show_creators'
 
-$show_genres = 'caramcc_show_genres2'
+$show_genres = 'caramcc_show_genres'
 $show_airdays = 'caramcc_show_airdays'
 $show_languages = 'caramcc_show_languages'
 $show_alt_titles = 'caramcc_show_alt_titles'
@@ -12,6 +12,12 @@ $show_alt_titles = 'caramcc_show_alt_titles'
 $networks = 'caramcc_networks'
 
 $updates = 'caramcc_updates'
+
+# acceptable TV Rage Fields
+$tvr_fields = %w(showname origin_country startdate ended classification runtime airtime airday timezone)
+
+# acceptable OMDB fields
+
 
 # Local
 $db_name = 'caramcc_dbd_project'

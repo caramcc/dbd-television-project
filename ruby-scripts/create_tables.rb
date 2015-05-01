@@ -21,7 +21,7 @@ require_relative 'constants.rb'
 
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$networks} (
-  network_name varchar(255) NOT NULL DEFAULT '',
+  network_name varchar(255) NOT NULL DEFAULT '' UNIQUE,
   network_twitter_id varchar(63),
   PRIMARY KEY (network_name)
 );")
@@ -54,14 +54,14 @@ require_relative 'constants.rb'
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$actors} (
   actor_id int(11) NOT NULL AUTO_INCREMENT,
-  actor_name varchar(255) NOT NULL DEFAULT '',
+  actor_name varchar(255) NOT NULL DEFAULT '' UNIQUE,
   actor_twitter_id varchar(63),
   PRIMARY KEY (actor_id)
 );")
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$creators} (
   creator_id int(11) NOT NULL AUTO_INCREMENT,
-  creator_name varchar(255) NOT NULL DEFAULT '',
+  creator_name varchar(255) NOT NULL DEFAULT '' UNIQUE,
   creator_twitter_id varchar(63),
   PRIMARY KEY (creator_id)
 );")
@@ -69,7 +69,7 @@ require_relative 'constants.rb'
 @client.query("CREATE TABLE IF NOT EXISTS #{$show_actors} (
   show_id int(11) NOT NULL,
   actor_id int(11) NOT NULL,
-  PRIMARY KEY (show_id, actor_id),
+  PRIMARY KEY (show_id, actor_id) UNIQUE,
   FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id) ON DELETE CASCADE,
   FOREIGN KEY (actor_id) REFERENCES #{$actors}(actor_id) ON DELETE CASCADE
 );")
@@ -78,7 +78,7 @@ require_relative 'constants.rb'
 @client.query("CREATE TABLE IF NOT EXISTS #{$show_creators} (
   show_id int(11) NOT NULL,
   creator_id int(11) NOT NULL,
-  PRIMARY KEY (show_id, creator_id),
+  PRIMARY KEY (show_id, creator_id) UNIQUE,
   FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id) ON DELETE CASCADE,
   FOREIGN KEY (creator_id) REFERENCES #{$creators}(creator_id) ON DELETE CASCADE
 );")
@@ -86,33 +86,33 @@ require_relative 'constants.rb'
 @client.query("CREATE TABLE IF NOT EXISTS #{$show_genres} (
   show_id int(11) NOT NULL,
   genre varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (show_id, genre),
+  PRIMARY KEY (show_id, genre) UNIQUE,
   FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id) ON DELETE CASCADE
 );")
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$show_airdays} (
   show_id int(11) NOT NULL,
   airday varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (show_id, airday),
+  PRIMARY KEY (show_id, airday) UNIQUE,
   FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id) ON DELETE CASCADE
 );")
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$show_alt_titles} (
   show_id int(11) NOT NULL,
   alt_title varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (show_id, alt_title),
+  PRIMARY KEY (show_id, alt_title) UNIQUE,
   FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id) ON DELETE CASCADE
 );")
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$show_languages} (
   show_id int(11) NOT NULL,
   language varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (show_id, language),
+  PRIMARY KEY (show_id, language) UNIQUE,
   FOREIGN KEY (show_id) REFERENCES #{$tv_shows}(show_id) ON DELETE CASCADE
 );")
 
 @client.query("CREATE TABLE IF NOT EXISTS #{$updates} (
-  update_id int(11) NOT NULL,
+  update_id int(11) NOT NULL AUTO INCREMENT,
   update_unix_time int(33) NOT NULL DEFAULT 0,
   PRIMARY KEY (update_id)
 );")
