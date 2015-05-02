@@ -124,7 +124,11 @@ found_ids.each do |show|
   omdb_show_uri = URI.parse(omdb_show_url)
   omdb_show_response = Net::HTTP.get_response(omdb_show_uri)
 
+  begin
   omdb_data = JSON.parse(omdb_show_response.body)
+  rescue JSON::ParserError
+    puts "parse error for id #{show_id} (imdb id #{show[:imdb_id]})"
+  end
 
   show_data = {}
 
