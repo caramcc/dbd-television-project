@@ -1,3 +1,9 @@
+CS 3200 DATABASE DESIGN
+
+PROJECT DOMAIN: TV Shows
+PROJECT CONTRIBUTORS: Cara McCormack
+
+
 PROJECT WRITEUP
 ===============
 
@@ -24,9 +30,11 @@ SQL for the 10 use cases outlined in previous assignments are found at:
 
 2. Data
 
-All data is currently stored in the databases prefixed `caramcc` on 
-bangerz@bangerz.co
+All data is currently stored in the databases prefixed `caramcc` on: 
+  bangerz@bangerz.co
 
+Additionally, JSON files containing much of the data can be found at:
+  bangerz@bangerz.co:~/caramcc/ruby-scripts/output-data/
 
 
 3. Scripts

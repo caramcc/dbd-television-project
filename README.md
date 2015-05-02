@@ -131,8 +131,48 @@ Tests using the following use cases can be found in the `test-queries` directory
 
 # Database Schema
 
+## UML Diagram
+
 ![](uml-may-1.png)
 
+## Relationships
+
+1. `caramcc_tv_shows` --- one-to-many ---> `caramcc_show_languages`
+  - foreign key: `caramcc_show_languages.show_id`
+
+
+1. `caramcc_tv_shows` --- one-to-many ---> `caramcc_show_genres`
+  - foreign key: `caramcc_show_genres.show_id`
+
+
+1. `caramcc_tv_shows` --- one-to-many ---> `caramcc_show_airdays`
+  - foreign key: `caramcc_show_airdays.show_id`
+
+
+1. `caramcc_tv_shows` --- one-to-many ---> `caramcc_show_alternate_titles`
+  - foreign key: `caramcc_show_alternate_titles.show_id`
+
+
+1. `caramcc_networks` --- one-to-many ---> `caramcc_tv_shows`
+  - foreign key: `caramcc_tv_shows.network_name`
+
+
+1. `caramcc_tv_shows` <--- many-to-many through `caramcc_show_creators` ---> `caramcc_creators`
+  - map table: `caramcc_show_creators`
+    - foreign key: `caramcc_tv_shows.show_id`
+    - foreign key: `caramcc_creators.creator_id`
+
+1. `caramcc_tv_shows` <--- many-to-many through `caramcc_show_actors` ---> `caramcc_actors`
+  - map table: `caramcc_show_actors`
+    - foreign key: `caramcc_tv_shows.show_id`
+    - foreign key: `caramcc_actors.actor_id`
+    
+    
+# Tables
+
+## Attributes
+
+###
 
 # Views
 
