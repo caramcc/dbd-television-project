@@ -37,7 +37,11 @@ no_imdb_data_shows.each do |show|
   omdb_id_uri = URI.parse(omdb_id_url)
   omdb_id_response = Net::HTTP.get_response(omdb_id_uri)
 
-  omdb_id_data = JSON.parse(omdb_id_response.body)
+  begin
+    omdb_id_data = JSON.parse(omdb_id_response.body)
+  rescue JSON::ParserError
+    puts "parse error for id #{show_id} (show title #{show['show_title']})"
+  end
 
   imdb_id = ''
   unless omdb_id_data["Response"] == "False"
@@ -66,7 +70,11 @@ no_start_years.each do |show|
   omdb_id_uri = URI.parse(omdb_id_url)
   omdb_id_response = Net::HTTP.get_response(omdb_id_uri)
 
-  omdb_id_data = JSON.parse(omdb_id_response.body)
+  begin
+    omdb_id_data = JSON.parse(omdb_id_response.body)
+  rescue JSON::ParserError
+    puts "parse error for id #{show_id} (show title #{show[:show_title]})"
+  end
 
   imdb_id = ''
   unless omdb_id_data["Response"] == "False"
@@ -95,7 +103,11 @@ no_series.each do |show|
   omdb_id_uri = URI.parse(omdb_id_url)
   omdb_id_response = Net::HTTP.get_response(omdb_id_uri)
 
-  omdb_id_data = JSON.parse(omdb_id_response.body)
+  begin
+    omdb_id_data = JSON.parse(omdb_id_response.body)
+  rescue JSON::ParserError
+    puts "parse error for id #{show_id} (show title #{show[:show_title]})"
+  end
 
   imdb_id = ''
   unless omdb_id_data["Response"] == "False"
@@ -125,7 +137,7 @@ found_ids.each do |show|
   omdb_show_response = Net::HTTP.get_response(omdb_show_uri)
 
   begin
-  omdb_data = JSON.parse(omdb_show_response.body)
+    omdb_data = JSON.parse(omdb_show_response.body)
   rescue JSON::ParserError
     puts "parse error for id #{show_id} (imdb id #{show[:imdb_id]})"
   end

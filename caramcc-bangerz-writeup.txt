@@ -1,0 +1,57 @@
+CS 3200 DATABASE DESIGN
+
+PROJECT DOMAIN: TV Shows
+PROJECT CONTRIBUTORS: Cara McCormack (solo)
+
+
+PROJECT WRITEUP
+===============
+
+
+0. GitHub Repository
+
+The GitHub repo I have been using for this project is located at:
+  https://github.com/caramcc/dbd-television-project
+
+
+
+B. Data Tables contributed to Bangerz Data Collective:
+
+All tables prefixed with `caramcc`:
+  caramcc_tv_shows (45639 unique TV Shows)
+  caramcc_actors (35936 unique actors)
+  caramcc_creators (5037 unique creators)
+  caramcc_networks (1156 unique networks)
+
+Also contributed map tables and array-tables:
+  caramcc_show_actors
+  caramcc_show_creators
+  caramcc_show_genres
+  caramcc_show_languages
+  caramcc_show_airdays
+  caramcc_show_alternate_titles
+
+Plus one table to store data about updates (for the auto-insertion scripts)
+  caramcc_updates
+
+
+C. Tables are populated with real world data on Bangerz
+
+D. Data quality audits are in the README of my github repo for this project
+
+E. Scripts that gather and insert the data are documented in my github README. Scripts that should be run to continually gather and insert data are:
+
+  updates.rb - should run once or twice per week
+  imdb_updates.rb - should run once or twice per month
+
+F. SQL for table creation, insertion, updates, and deletes are found scattered in the various ruby scripts to gather/clean/insert the data. Documented on github README.
+
+G. Scripts that export data as a JSON data dump 
+
+H. Blog post zipped with this file, also found on github/bangerz at ~/caramcc/bangerz_blog.html
+
+I. Yes, I do want to be a co-author on the Bangerz Data Collective conference paper.
+
+J. All scripts and SQL have a brief header stating that they are MIT licensed. A full MIT license can also be found in the README of the github repo.
+
+K. License agreement email was sent on 30 Mar 2015
