@@ -46,7 +46,7 @@ E. Scripts that gather and insert the data are documented in my github README. S
 
 F. SQL for table creation, insertion, updates, and deletes are found scattered in the various ruby scripts to gather/clean/insert the data. Documented on github README.
 
-G. Scripts that export data as a JSON data dump 
+G. Scripts that export data as a JSON data dump (covered by MA according to piazza)
 
 H. Blog post zipped with this file, also found on github/bangerz at ~/caramcc/tv_shows_caramcc.html
 
@@ -54,4 +54,4 @@ I. Yes, I do want to be a co-author on the Bangerz Data Collective conference pa
 
 J. All scripts and SQL have a brief header stating that they are MIT licensed. A full MIT license can also be found in the README of the github repo.
 
-K. License agreement email was sent on 30 Mar 2015
+K. License agreement email was sent on 30 Mar 2015.

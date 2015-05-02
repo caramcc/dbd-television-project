@@ -41,6 +41,7 @@ no_imdb_data_shows.each do |show|
     omdb_id_data = JSON.parse(omdb_id_response.body)
   rescue JSON::ParserError
     puts "parse error for id #{show['show_id']} (show title #{show['show_title']})"
+    next
   end
 
   imdb_id = ''
@@ -74,6 +75,7 @@ no_start_years.each do |show|
     omdb_id_data = JSON.parse(omdb_id_response.body)
   rescue JSON::ParserError
     puts "parse error for id #{show_id} (show title #{show[:show_title]})"
+    next
   end
 
   imdb_id = ''
@@ -107,6 +109,7 @@ no_series.each do |show|
     omdb_id_data = JSON.parse(omdb_id_response.body)
   rescue JSON::ParserError
     puts "parse error for id #{show_id} (show title #{show[:show_title]})"
+    next
   end
 
   imdb_id = ''
@@ -140,6 +143,7 @@ found_ids.each do |show|
     omdb_data = JSON.parse(omdb_show_response.body)
   rescue JSON::ParserError
     puts "parse error for id #{show_id} (imdb id #{show[:imdb_id]})"
+    next
   end
 
   show_data = {}
