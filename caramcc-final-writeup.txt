@@ -63,7 +63,7 @@ II. Description of tables
 III. Descriptions of attributes
 
   A description of the non-obvious attributes can be found in the README
-  on my GitHub repo, under the heading#subheading: Tables#Attributes
+  on my GitHub repo, under the heading: Tables
 
 IV. Descriptions of use cases
 
@@ -73,7 +73,7 @@ IV. Descriptions of use cases
 V. Explanations of relationships
 
   Explanations of the relationships between the tables can be found on my
-  GitHub README under the heading#subheading: Database Schema#Relationships
+  GitHub README under the heading > subheading: Database Schema > Relationships
 
 VI. Explanations of additional constraints
 

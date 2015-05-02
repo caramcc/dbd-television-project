@@ -170,7 +170,20 @@ Tests using the following use cases can be found in the `test-queries` directory
     
 # Tables
 
+## caramcc_tv_shows
+
+The table `caramcc_tv_shows` represents a television show.
+
 ## Attributes
+
+- *Primary Key:* `show_id`
+
+- *Foreign Keys:* `network_name`
+  - references table `caramcc_networks`
+  
+- *Other Notable Fields:*
+  - 
+
 
 ###
 
