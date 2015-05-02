@@ -1,6 +1,6 @@
 # Access
 
-This database belongs to the [Bangerz](http://bangerz.co) data repository.
+This database belongs to the [Bangerz](http://bangerz.co) Data Collective.
 
 On the Bangerz server, it is located in the directory `~/caramcc/`.
 

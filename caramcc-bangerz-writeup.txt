@@ -4,7 +4,7 @@ PROJECT DOMAIN: TV Shows
 PROJECT CONTRIBUTORS: Cara McCormack (solo)
 
 
-PROJECT WRITEUP
+BANGERZ WRITEUP
 ===============
 
 
@@ -48,7 +48,7 @@ F. SQL for table creation, insertion, updates, and deletes are found scattered i
 
 G. Scripts that export data as a JSON data dump 
 
-H. Blog post zipped with this file, also found on github/bangerz at ~/caramcc/bangerz_blog.html
+H. Blog post zipped with this file, also found on github/bangerz at ~/caramcc/tv_shows_caramcc.html
 
 I. Yes, I do want to be a co-author on the Bangerz Data Collective conference paper.
 
