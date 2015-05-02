@@ -1,0 +1,77 @@
+PROJECT WRITEUP
+===============
+
+
+0. GitHub Repository
+
+The GitHub repo I have been using for this project is located at:
+  https://github.com/caramcc/dbd-television-project
+
+
+
+1. SQL
+
+SQL to create tables is located at:
+  bangerz@bangerz.co:~/caramcc/ruby-scripts/create_tables.rb
+
+SQL to create views is located at:
+  bangerz@bangerz.co:~/caramcc/ruby-scripts/create_views.rb
+
+SQL for the 10 use cases outlined in previous assignments are found at:
+  bangerz@bangerz.co:~/caramcc/ruby-scripts/test-queries/
+
+
+
+2. Data
+
+All data is currently stored in the databases prefixed `caramcc` on 
+bangerz@bangerz.co
+
+
+
+3. Scripts
+
+All scripts are located at:
+  bangerz@bangerz.co:~/caramcc/ruby-scripts/
+
+They are documented in the README on my GitHub repo, also located at:
+  bangerz@bangerz.co:~/caramcc/README.md
+
+
+
+4. Documentation
+
+
+I. Auditing
+
+  Information on data quality and completeness can be found in the README 
+  on my GitHub repo, under the heading: Data Auditing.
+
+II. Description of tables
+
+  A description of the tables and how they are used can be found in the
+  README on my GitHub repo, under the heading: Tables.
+
+III. Descriptions of attributes
+
+  A description of the non-obvious attributes can be found in the README
+  on my GitHub repo, under the heading#subheading: Tables#Attributes
+
+IV. Descriptions of use cases
+
+  Descriptions of each use case can be found on my GitHub README under the
+  heading: Use Cases
+
+V. Explanations of relationships
+
+  Explanations of the relationships between the tables can be found on my
+  GitHub README under the heading#subheading: Database Schema#Relationships
+
+VI. Explanations of additional constraints
+
+  No additional constraints.
+
+VII. Explanation of views
+
+  Major views that touch the tables are explained on GitHub Readme under the
+  heading: Views
