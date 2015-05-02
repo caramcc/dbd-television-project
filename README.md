@@ -1,4 +1,10 @@
-# Set Up
+# Access
+
+This database belongs to the [Bangerz](http://bangerz.co) data repository.
+
+On the Bangerz server, it is located in the directory `~/caramcc/`.
+
+# Set Up Locally
 
 1. Clone or Fork this GitHub Repository.
 
@@ -74,7 +80,6 @@ The data was downloaded and reformatted using the following scripts, located in 
 
 
 
-
 # Data Auditing
 
 ## Validity/ Accuracy:
@@ -104,12 +109,12 @@ Most of the time, missing OMDb data implies that the show is very old and/or obs
 
 # SQL
 
-SQL to insert the data into my database is found in: `populate_tables.rb` and `populate_networks_and_show_handles.rb`
+SQL to insert the data into my database is found in: `populate_tables.rb`
 
 The data is cleaned on first insertion. Code to clean the data is found in `populate_tables.rb`.
 
 
-# Tests
+# Use Cases
 
 Tests using the following use cases can be found in the `test-queries` directory. They are each named `example_n.rb` where n = the number given here:
 
@@ -126,4 +131,14 @@ Tests using the following use cases can be found in the `test-queries` directory
 
 # Database Schema
 
-![](uml-apr-1.png)
+![](uml-may-1.png)
+
+
+# Views
+
+- `caramcc_all_show_genres` - all show data joined with genre data
+- `caramcc_all_show_languages` - all show data joined with language data
+- `caramcc_all_show_creators` - all show data joined with creator data
+- `caramcc_all_show_actors` - all show data joined with actor data
+- `caramcc_actor_genres` - actor name joined with genres the actor has appeared in
+- `caramcc_creator_genres` - creator name joined with genres the creator has worked on
