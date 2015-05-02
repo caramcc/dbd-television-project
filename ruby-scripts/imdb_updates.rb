@@ -40,7 +40,7 @@ no_imdb_data_shows.each do |show|
   begin
     omdb_id_data = JSON.parse(omdb_id_response.body)
   rescue JSON::ParserError
-    puts "parse error for id #{show_id} (show title #{show['show_title']})"
+    puts "parse error for id #{show['show_id']} (show title #{show['show_title']})"
   end
 
   imdb_id = ''
