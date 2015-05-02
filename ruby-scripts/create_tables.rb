@@ -1,3 +1,11 @@
+# Licensed under The MIT License (MIT)
+#
+# Copyright (c) 2015 Cara McCormack
+#
+# For more information view the project README
+# or visit http://opensource.org/licenses/MIT
+
+
 require 'mysql2'
 require 'json'
 

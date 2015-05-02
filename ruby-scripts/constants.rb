@@ -1,3 +1,10 @@
+# Licensed under The MIT License (MIT)
+#
+# Copyright (c) 2015 Cara McCormack
+#
+# For more information view the project README
+# or visit http://opensource.org/licenses/MIT
+
 $tv_shows = 'caramcc_tv_shows'
 $actors = 'caramcc_actors'
 $show_actors = 'caramcc_show_actors'
