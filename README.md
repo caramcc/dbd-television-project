@@ -174,18 +174,120 @@ Tests using the following use cases can be found in the `test-queries` directory
 
 The table `caramcc_tv_shows` represents a television show.
 
-## Attributes
+### Attributes
 
 - *Primary Key:* `show_id`
 
-- *Foreign Keys:* `network_name`
+- *Foreign Key:* `network_name`
   - references table `caramcc_networks`
   
 - *Other Notable Fields:*
-  - 
+  - `flagged` - denotes an entry that should be reviewed manually for data validity
+  - `flag` - brief descriptor about why the data should be reviewed manually
+
+## caramcc_networks
+
+The table `caramcc_networks` represents a network that produces tv shows.
+
+### Attributes
+
+- *Primary Key:* `network_name`
+
+## caramcc_show_genres
+
+The table `caramcc_show_genres` represents the genres each show is classified as.
+
+### Attributes
+
+- *Primary Key:* (composite) `(show_id, genre)`
+
+- *Foreign Key:* `show_id`
+  - references table `caramcc_tv_shows`
 
 
-###
+## caramcc_show_languages
+
+The table `caramcc_show_languages` represents the languages each show is aired in.
+
+### Attributes
+
+- *Primary Key:* (composite) `(show_id, language)`
+
+- *Foreign Key:* `show_id`
+  - references table `caramcc_tv_shows`
+
+
+## caramcc_show_airdays
+
+The table `caramcc_show_airdays` represents the day of the week each show is aired on.
+
+### Attributes
+
+- *Primary Key:* (composite) `(show_id, airday)`
+
+- *Foreign Key:* `show_id`
+  - references table `caramcc_tv_shows`
+
+
+## caramcc_show_alternate_titles
+
+The table `caramcc_show_alternate_titles` represents other titles that reference the a given show.
+
+### Attributes
+
+- *Primary Key:* (composite) `(show_id, alternate_title)`
+
+- *Foreign Key:* `show_id`
+  - references table `caramcc_tv_shows`
+
+
+## caramcc_show_actors
+
+The table `caramcc_show_actors` maps between `caramcc_tv_shows` and `caramcc_actors`.
+
+### Attributes
+
+- *Primary Key:* (composite) `(actor_id, show_id)`
+
+- *Foreign Key:* `actor_id`
+  - references table `caramcc_actors`
+  
+- *Foreign Key:* `show_id`
+  - references table `caramcc_tv_shows`
+
+
+## caramcc_show_creators
+
+The table `caramcc_show_creators` maps between `caramcc_tv_shows` and `caramcc_creators`.
+
+### Attributes
+
+- *Primary Key:* (composite) `(creator_id, show_id)`
+
+- *Foreign Key:* `creator_id`
+  - references table `caramcc_creators`
+  
+- *Foreign Key:* `show_id`
+  - references table `caramcc_tv_shows`
+
+
+## caramcc_show_creators
+
+The table `caramcc_creators` represents the main staff responsible for the creation of a show (usually writers, directors, or producers).
+
+### Attributes
+
+- *Primary Key:* `creator_id`
+
+
+## caramcc_show_actors
+
+The table `caramcc_actors` represents the main cast of a show.
+
+### Attributes
+
+- *Primary Key:* `actor_id`
+
 
 # Views
 
